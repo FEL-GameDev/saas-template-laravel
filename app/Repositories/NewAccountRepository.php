@@ -22,6 +22,7 @@ class NewAccountRepository implements NewAccountRepositoryInterface
             "email" => $newAccountDTO->email,
             "password" => $newAccountDTO->password,
             "name" => $newAccountDTO->name,
+            "is_owner" => true,
         ]);
     }
 }
