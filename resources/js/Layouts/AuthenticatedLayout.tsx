@@ -76,6 +76,15 @@ export default function Authenticated({
                                         >
                                             Profile
                                         </Dropdown.Link>
+
+                                        {user.is_owner && (
+                                            <Dropdown.Link
+                                                href={route("users.index")}
+                                            >
+                                                Manage Users
+                                            </Dropdown.Link>
+                                        )}
+
                                         <Dropdown.Link
                                             href={route("logout")}
                                             method="post"
@@ -167,6 +176,13 @@ export default function Authenticated({
                             <ResponsiveNavLink href={route("profile.edit")}>
                                 Profile
                             </ResponsiveNavLink>
+
+                            {user.is_owner && (
+                                <ResponsiveNavLink href={route("users.index")}>
+                                    Manage Users
+                                </ResponsiveNavLink>
+                            )}
+
                             <ResponsiveNavLink
                                 method="post"
                                 href={route("logout")}
