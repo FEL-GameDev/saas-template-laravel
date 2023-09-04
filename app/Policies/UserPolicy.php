@@ -10,4 +10,9 @@ class UserPolicy
     {
         return $user->is_owner;
     }
+
+    public function invite(User $user)
+    {
+        return $user->is_owner;
+    }
 }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\ChirpController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserInviteController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -43,6 +44,10 @@ Route::resource('chirps', ChirpController::class)
 
 Route::resource('users', UserController::class)
     ->only(['index'])
+    ->middleware(['auth', 'verified']);
+
+Route::resource('user_invites', UserInviteController::class)
+    ->only(['index', 'create', 'store', 'destroy'])
     ->middleware(['auth', 'verified']);
 
 require __DIR__ . '/auth.php';
