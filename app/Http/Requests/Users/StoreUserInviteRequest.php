@@ -4,6 +4,7 @@ namespace App\Http\Requests\Users;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use App\Models\User;
 use App\Models\UserInvite;
 
 class StoreUserInviteRequest extends FormRequest
@@ -17,7 +18,7 @@ class StoreUserInviteRequest extends FormRequest
     {
         return [
             'name' => ['string', 'max:255'],
-            'email' => ['email', 'max:255', Rule::unique(UserInvite::class)],
+            'email' => ['email', 'max:255', Rule::unique(UserInvite::class, 'email'), Rule::unique(User::class, 'email')],
         ];
     }
 }
