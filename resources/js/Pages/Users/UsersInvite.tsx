@@ -2,10 +2,11 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, useForm } from "@inertiajs/react";
 import { PageProps } from "@/types";
 import { BaseSyntheticEvent } from "react";
-import TextInput from "@/Components/TextInput";
-import InputError from "@/Components/InputError";
+import TextInput from "@/Components/Forms/TextInput";
+import InputError from "@/Components/Forms/InputError";
 import PrimaryButton from "@/Components/PrimaryButton";
-import InputLabel from "@/Components/InputLabel";
+import InputLabel from "@/Components/Forms/InputLabel";
+import TextField from "@/Components/Forms/TextField";
 
 export interface UsersInviteProps extends PageProps {}
 
@@ -24,32 +25,32 @@ export default function UsersInvite({ auth }: UsersInviteProps) {
         <AuthenticatedLayout user={auth.user}>
             <Head title="Invite New Users" />
 
-            <div className="container">
-                <form onSubmit={submit}>
-                    <InputLabel htmlFor="name">Name</InputLabel>
-                    <TextInput
+            <div className="sm:container mx-auto flex justify-center p-8">
+                <form
+                    onSubmit={submit}
+                    className="flex flex-col justify-center gap-4 w-4/12"
+                >
+                    <TextField
+                        fullWidth
                         name="name"
                         value={data.name}
-                        onChange={(e) => setData("name", e.target.value)}
+                        errors={errors.name}
+                        label="Name"
+                        onChange={(e: any) => setData("name", e.target.value)}
                     />
 
-                    <InputError message={errors.name} className="mt-2" />
-
-                    <InputLabel htmlFor="email">Email</InputLabel>
-                    <TextInput
-                        type="email"
+                    <TextField
+                        fullWidth
                         name="email"
                         value={data.email}
-                        onChange={(e) => setData("email", e.target.value)}
+                        errors={errors.email}
+                        label="Email"
+                        onChange={(e: any) => setData("email", e.target.value)}
                     />
 
-                    <InputError message={errors.email} className="mt-2" />
-
-                    <div>
-                        <PrimaryButton className="mt-4" disabled={processing}>
-                            Invite
-                        </PrimaryButton>
-                    </div>
+                    <PrimaryButton className="mt-4" disabled={processing}>
+                        Send Invite
+                    </PrimaryButton>
                 </form>
             </div>
         </AuthenticatedLayout>
