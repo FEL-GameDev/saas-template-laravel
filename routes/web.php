@@ -4,6 +4,7 @@ use App\Http\Controllers\ChirpController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserInviteController;
+use App\Http\Controllers\AccountController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -48,6 +49,13 @@ Route::resource('users', UserController::class)
 
 Route::resource('user_invites', UserInviteController::class)
     ->only(['index', 'create', 'store', 'destroy'])
+    ->middleware(['auth', 'verified']);
+
+Route::controller(AccountController::class)
+    ->group(function () {
+        Route::get('/account', 'index')->name('account.index');
+        Route::delete('/account', 'destroy')->name('account.destroy');
+    })
     ->middleware(['auth', 'verified']);
 
 require __DIR__ . '/auth.php';

@@ -1,5 +1,5 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import DeleteUserForm from "./Partials/DeleteUserForm";
+import DeleteUserForm from "../Account/Partials/DeleteAccountForm";
 import UpdatePasswordForm from "./Partials/UpdatePasswordForm";
 import UpdateProfileInformationForm from "./Partials/UpdateProfileInformationForm";
 import { Head } from "@inertiajs/react";
@@ -38,17 +38,6 @@ export default function Edit({
                     subheading="Ensure your account is using a long, random password to stay secure."
                 >
                     <UpdatePasswordForm />
-                </Card>
-
-                <Card
-                    className="max-w-xl"
-                    heading="Delete Account"
-                    subheading="Once your account is deleted, all of its resources and data
-                    will be permanently deleted. Before deleting your account,
-                    please download any data or information that you wish to
-                    retain."
-                >
-                    <DeleteUserForm />
                 </Card>
             </PageContainer>
         </AuthenticatedLayout>

@@ -85,6 +85,14 @@ export default function Authenticated({
                                             </Dropdown.Link>
                                         )}
 
+                                        {user.is_owner && (
+                                            <Dropdown.Link
+                                                href={route("account.index")}
+                                            >
+                                                Account
+                                            </Dropdown.Link>
+                                        )}
+
                                         <Dropdown.Link
                                             href={route("logout")}
                                             method="post"
@@ -180,6 +188,14 @@ export default function Authenticated({
                             {user.is_owner && (
                                 <ResponsiveNavLink href={route("users.index")}>
                                     Manage Users
+                                </ResponsiveNavLink>
+                            )}
+
+                            {user.is_owner && (
+                                <ResponsiveNavLink
+                                    href={route("account.index")}
+                                >
+                                    Account
                                 </ResponsiveNavLink>
                             )}
 
