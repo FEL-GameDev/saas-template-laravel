@@ -6,8 +6,6 @@ use App\DTO\NewAccountDTO;
 use App\Repositories\NewAccountRepository;
 use App\Repositories\Interfaces\NewAccountRepositoryInterface;
 use App\Models\User;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Support\Facades\Auth;
 
 class NewAccount
 {

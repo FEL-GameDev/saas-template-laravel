@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Services\DeleteAccount;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -39,20 +40,8 @@ class AccountController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        $this->delete_account($user);
+        DeleteAccount::delete($user);
 
         return Redirect::to('/');
-    }
-
-    /**
-     * Deletes an account for given owner, ensure all related assets are destroyed
-     *
-     * @param User $user
-     * @return void
-     */
-    private function delete_account(User $user): void
-    {
-        // TODO Create a service to handle this!
-        $user->account()->delete();
     }
 }
