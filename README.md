@@ -7,6 +7,19 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## Setup
+- (Windows) Install xampp
+- Install composer, use the xampp version of PHP during setup
+- Install nodejs
+- Clone the repo into the htdocs folder of xampp
+
+- Open the project in your code editor and open a terminal
+- Run `composer up` to install Laravel and its installed dependencies
+- Run `npm install`
+- Generate an application encryption key using `php artisan key:generate` (this is also available in the web browser if you navigate to the correct address for the public folder)
+
+
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
