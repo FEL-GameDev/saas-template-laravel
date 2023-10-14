@@ -7,6 +7,39 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## Setup
+
+### Get the saas app up and running
+- (Windows) Install xampp
+- Install composer, use the xampp version of PHP during setup
+- Install nodejs
+- Clone the repo into the htdocs folder of xampp
+
+- Open the project in your code editor and open a terminal
+- Run `composer up` to install Laravel and its dependencies
+- Run `npm install` to install the necessary packages
+- Generate an application encryption key using `php artisan key:generate` (this is also available in the web browser if you navigate to the correct address for the public folder)
+- Run `php artisan migrate`
+- Run `npm run dev` to start the vite compiler
+- Check out `localhost/saas-template-laravel/public`
+
+### Configure a local convenience domain
+- Open up windows hosts file `C:\Windows\System32\drivers\etc`
+- Add hosts record for example
+`127.0.0.1	mysaaslocal.com`
+
+- Open up the xampp `https-vhosts.conf` file from `C:\xampp\apache\conf\extra`
+- Add a record here for your virtual host
+```
+<VirtualHost *:80>
+	DocumentRoot "C:/xampp/htdocs/saas-template-laravel/public"
+	ServerName mysaaslocal.com
+</VirtualHost>
+```
+- Restart your apache server using xampp
+- Visit your new convenience domain in the browser
+- Profit.
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
