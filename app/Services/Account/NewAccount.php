@@ -9,8 +9,6 @@ use App\Models\User;
 
 class NewAccount
 {
-    private NewAccountRepositoryInterface $createAccountRepository;
-
     /**
      * Register a new account from a signup flow
      *
