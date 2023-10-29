@@ -8,7 +8,7 @@ class NewAccountDTO
         public readonly string $name,
         public readonly string $email,
         public readonly string $password,
-        public readonly string $account_name,
+        public readonly string $accountName,
     ) {
     }
 
