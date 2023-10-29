@@ -10,8 +10,17 @@ class Account extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+    ];
+
     function users(): HasMany
     {
         return $this->hasMany(User::class);
+    }
+
+    function userInvites(): HasMany
+    {
+        return $this->hasMany(UserInvite::class);
     }
 }
