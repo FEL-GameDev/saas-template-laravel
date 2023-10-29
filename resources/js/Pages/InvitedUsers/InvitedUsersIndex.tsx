@@ -20,7 +20,7 @@ export default function InvitedUsersIndex({
     inviteCode,
     name,
     email,
-    organization = "Quorums Rest",
+    organization,
 }: InvitedUsersIndexProps) {
     const { data, setData, patch, errors, processing, recentlySuccessful } =
         useForm({
