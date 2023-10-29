@@ -8,6 +8,7 @@ import GuestLayout from "@/Layouts/GuestLayout";
 import { FormEventHandler } from "react";
 import TextInput from "@/Components/Forms/TextInput";
 import InputLabel from "@/Components/Forms/InputLabel";
+import InputError from "@/Components/Forms/InputError";
 
 export interface InvitedUsersIndexProps extends PageProps {
     name: string;
@@ -60,6 +61,11 @@ export default function InvitedUsersIndex({
                                 required
                                 autoComplete="name"
                             />
+
+                            <InputError
+                                message={errors.name}
+                                className="mt-2"
+                            />
                         </div>
 
                         <div>
@@ -75,6 +81,11 @@ export default function InvitedUsersIndex({
                                 required
                                 isFocused
                                 autoComplete="password"
+                            />
+
+                            <InputError
+                                message={errors.password}
+                                className="mt-2"
                             />
                         </div>
 
