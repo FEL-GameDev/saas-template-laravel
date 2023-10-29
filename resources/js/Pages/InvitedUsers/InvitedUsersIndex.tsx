@@ -23,17 +23,18 @@ export default function InvitedUsersIndex({
     email,
     organization,
 }: InvitedUsersIndexProps) {
-    const { data, setData, patch, errors, processing, recentlySuccessful } =
+    const { data, setData, post, errors, processing, recentlySuccessful } =
         useForm({
             name,
             password: "",
             email,
+            inviteCode,
         });
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
-        patch(route("register.acceptInvite"));
+        post(route("register.acceptInvite"));
     };
 
     return (
@@ -53,6 +54,7 @@ export default function InvitedUsersIndex({
 
                             <TextInput
                                 id="name"
+                                name="name"
                                 className="mt-1 block w-full"
                                 value={data.name}
                                 onChange={(e) =>
@@ -73,7 +75,9 @@ export default function InvitedUsersIndex({
 
                             <TextInput
                                 id="password"
+                                name="password"
                                 className="mt-1 block w-full"
+                                type="password"
                                 value={data.password}
                                 onChange={(e) =>
                                     setData("password", e.target.value)
@@ -91,6 +95,7 @@ export default function InvitedUsersIndex({
 
                         <TextInput
                             id="email"
+                            name="email"
                             value={email}
                             hidden={true}
                             readOnly
@@ -98,10 +103,15 @@ export default function InvitedUsersIndex({
 
                         <TextInput
                             readOnly
+                            name="inviteCode"
                             id="inviteCode"
                             value={inviteCode}
                             hidden={true}
                         />
+
+                        <PrimaryButton disabled={processing}>
+                            Submit
+                        </PrimaryButton>
                     </form>
                 </Card>
             </PageContainer>
