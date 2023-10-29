@@ -9,14 +9,12 @@ use App\Repositories\Interfaces\NewAccountRepositoryInterface;
 
 class NewAccountRepository implements NewAccountRepositoryInterface
 {
-    /**
-     * Summary of createNewAccountFromUser
-     * @param \App\DTO\NewAccountDTO $newAccountDTO
-     * @return \App\Models\User
-     */
+
     public function createNewAccountFromUser(NewAccountDTO $newAccountDTO): User
     {
-        $account = Account::create();
+        $account = Account::create([
+            'name' => $newAccountDTO->account_name,
+        ]);
 
         return $account->users()->create([
             "email" => $newAccountDTO->email,

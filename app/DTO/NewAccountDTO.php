@@ -8,6 +8,7 @@ class NewAccountDTO
         public readonly string $name,
         public readonly string $email,
         public readonly string $password,
+        public readonly string $account_name,
     ) {
     }
 
@@ -19,6 +20,6 @@ class NewAccountDTO
      */
     public static function create(string $name, string $email, string $password): NewAccountDTO
     {
-        return new self($name, $email, $password);
+        return new self($name, $email, $password, "Account Name Lol");
     }
 }
