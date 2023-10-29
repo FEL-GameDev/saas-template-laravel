@@ -29,7 +29,7 @@ class UserInvitedController extends Controller
         ]);
     }
 
-    public function accept_invite(Request $request)
+    public function store(Request $request)
     {
         $request->validate();
 

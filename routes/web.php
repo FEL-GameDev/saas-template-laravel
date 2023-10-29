@@ -62,5 +62,6 @@ Route::controller(AccountController::class)
 
 Route::get('/register/invited/{inviteCode}', [UserInvitedController::class, 'invited'])->name('register.invited');
 Route::get('/register/invited', [UserInvitedController::class, 'index'])->name('register.index');
+Route::post('/register/invited/store', [UserInvitedController::class, 'store'])->name('register.acceptInvite');
 
 require __DIR__ . '/auth.php';
