@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\DTO\RegisterUserInviteDTO;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UserInvite\RegisterUserInvite;
+use App\Http\Requests\UserInvite\RegisterUserInviteRequest;
 use App\Services\UserInvite\GetUserInvite;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
@@ -29,7 +29,7 @@ class UserInvitedController extends Controller
         ]);
     }
 
-    public function store(RegisterUserInvite $request)
+    public function store(RegisterUserInviteRequest $request)
     {
         $userInviteDTO = RegisterUserInviteDTO::create(
             $request->name,
