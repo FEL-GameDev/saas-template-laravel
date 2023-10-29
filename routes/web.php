@@ -4,6 +4,7 @@ use App\Http\Controllers\ChirpController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserInviteController;
+use App\Http\Controllers\UserInvitedController;
 use App\Http\Controllers\AccountController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -27,7 +28,7 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-});
+})->name('root');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -57,5 +58,9 @@ Route::controller(AccountController::class)
         Route::delete('/account', 'destroy')->name('account.destroy');
     })
     ->middleware(['auth', 'verified']);
+
+
+Route::get('/register/invited/{inviteCode}', [UserInvitedController::class, 'invited'])->name('register.invited');
+Route::get('/register/invited', [UserInvitedController::class, 'index'])->name('register.index');
 
 require __DIR__ . '/auth.php';
