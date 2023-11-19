@@ -1,10 +1,10 @@
-import { useEffect, FormEventHandler } from "react";
+import {FormEventHandler, useEffect} from "react";
 import GuestLayout from "@/Layouts/GuestLayout";
 import InputError from "@/Components/Forms/InputError";
 import InputLabel from "@/Components/Forms/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/Forms/TextInput";
-import { Head, Link, useForm } from "@inertiajs/react";
+import {Head, Link, useForm} from "@inertiajs/react";
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -12,6 +12,7 @@ export default function Register() {
         email: "",
         password: "",
         password_confirmation: "",
+        account_name: "",
     });
 
     useEffect(() => {
@@ -46,6 +47,27 @@ export default function Register() {
                     />
 
                     <InputError message={errors.name} className="mt-2" />
+                </div>
+
+                <div className="mt-4">
+                    <InputLabel htmlFor="account_name" value="Company Name" />
+
+                    <TextInput
+                        id="account_name"
+                        name="account_name"
+                        value={data.account_name}
+                        className="mt-1 block w-full"
+                        autoComplete="account_name"
+                        onChange={(e) =>
+                            setData("account_name", e.target.value)
+                        }
+                        required
+                    />
+
+                    <InputError
+                        message={errors.account_name}
+                        className="mt-2"
+                    />
                 </div>
 
                 <div className="mt-4">

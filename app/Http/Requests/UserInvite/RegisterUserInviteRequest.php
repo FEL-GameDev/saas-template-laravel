@@ -17,9 +17,9 @@ class RegisterUserInviteRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:' . User::class,
+            'email' => 'required|string|email|max:255|unique:' . User::class . '|exists:user_invites',
             'password' => ['required', Rules\Password::defaults()],
-            'inviteCode' => ['required'], // TODO Matches an existing record and email
+            'inviteCode' => 'required|exists:user_invites,invite_code',
         ];
     }
 }

@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\DTO\RegisterUserInviteDTO;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\UserInvite\RegisterUserInviteRequest;
+use App\Providers\RouteServiceProvider;
+use App\Services\User\RegisterInvitedUser;
 use App\Services\UserInvite\GetUserInvite;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 use Inertia\Response;
-use Illuminate\Support\Facades\Hash;
 
 class UserInvitedController extends Controller
 {
@@ -37,5 +39,11 @@ class UserInvitedController extends Controller
             Hash::make($request->password),
             $request->inviteCode
         );
+
+        $user = RegisterInvitedUser::register($userInviteDTO);
+
+        Auth::login($user);
+
+        return redirect(RouteServiceProvider::HOME);
     }
 }

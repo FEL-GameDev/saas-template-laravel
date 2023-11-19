@@ -18,8 +18,8 @@ class NewAccountDTO
      * @param string $password
      * @return NewAccountDTO
      */
-    public static function create(string $name, string $email, string $password): NewAccountDTO
+    public static function create(string $name, string $email, string $password, string $accountName): NewAccountDTO
     {
-        return new self($name, $email, $password, "Account Name Lol");
+        return new self($name, $email, $password, $accountName);
     }
 }

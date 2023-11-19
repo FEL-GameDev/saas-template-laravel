@@ -6,7 +6,7 @@ use App\DTO\NewAccountDTO;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
-use App\Services\Account\NewAccount;
+use App\Services\Account\CreateAccount;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -37,15 +37,17 @@ class RegisteredUserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:' . User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'account_name' => 'required|string|max:255'
         ]);
 
         $newAccountDTO = NewAccountDTO::create(
             name: $request->name,
             email: $request->email,
-            password: Hash::make($request->password)
+            password: Hash::make($request->password),
+            accountName: $request->account_name
         );
 
-        $user = NewAccount::register($newAccountDTO);
+        $user = CreateAccount::register($newAccountDTO);
 
         event(new Registered($user));
 

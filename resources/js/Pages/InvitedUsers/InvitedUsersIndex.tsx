@@ -1,11 +1,10 @@
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, Link, useForm } from "@inertiajs/react";
-import { PageProps, User } from "@/types";
+import {Head, useForm} from "@inertiajs/react";
+import {PageProps} from "@/types";
 import PageContainer from "@/Components/PageContainer";
 import Card from "@/Components/Card";
 import PrimaryButton from "@/Components/PrimaryButton";
 import GuestLayout from "@/Layouts/GuestLayout";
-import { FormEventHandler } from "react";
+import {FormEventHandler} from "react";
 import TextInput from "@/Components/Forms/TextInput";
 import InputLabel from "@/Components/Forms/InputLabel";
 import InputError from "@/Components/Forms/InputError";
@@ -23,7 +22,7 @@ export default function InvitedUsersIndex({
     email,
     organization,
 }: InvitedUsersIndexProps) {
-    const { data, setData, post, errors, processing, recentlySuccessful } =
+    const { data, setData, post, errors, processing } =
         useForm({
             name,
             password: "",
@@ -93,20 +92,9 @@ export default function InvitedUsersIndex({
                             />
                         </div>
 
-                        <TextInput
-                            id="email"
-                            name="email"
-                            value={email}
-                            hidden={true}
-                            readOnly
-                        />
-
-                        <TextInput
-                            readOnly
-                            name="inviteCode"
-                            id="inviteCode"
-                            value={inviteCode}
-                            hidden={true}
+                        <InputError
+                            message={errors.inviteCode}
+                            className="mt-2"
                         />
 
                         <PrimaryButton disabled={processing}>
