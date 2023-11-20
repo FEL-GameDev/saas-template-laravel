@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\DTO\CreateUserInviteDTO;
 use App\Http\Requests\Users\StoreUserInviteRequest;
 use App\Models\UserInvite;
+use App\Services\UserInvite\CreateUserInvite;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -27,15 +29,14 @@ class UserInviteController extends Controller
     {
         $this->authorize('create', [UserInvite::class, $request->user()]);
 
-        $account_id = $request->user()->account->id;
-        UserInvite::create(
-            [
-                ...$request->validated(),
-                'account_id' => $account_id,
-                'user_id' => $request->user()->id,
-                'invite_code' => hash("crc32", $request->email . $account_id)
-            ]
+        $createUserInviteDTO = CreateUserInviteDTO::create(
+            name: $request->name,
+            email: $request->email,
+            userId: $request->user()->id,
+            accountId: $request->user()->account->id
         );
+
+        CreateUserInvite::create($createUserInviteDTO);
 
         return redirect(route('user_invites.create'));
     }
