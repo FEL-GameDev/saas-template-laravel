@@ -3,13 +3,13 @@
 namespace App\Repositories\Interfaces;
 
 use App\DTO\NewAccountDTO;
-use App\Models\User;
+use App\Models\Account;
 
 interface NewAccountRepositoryInterface
 {
     /**
      * @param NewAccountDTO $newAccountDTO
-     * @return User
+     * @return Account
      */
-    public function createNewAccountFromUser(NewAccountDTO $newAccountDTO): User;
+    public function createNewAccountFromUser(NewAccountDTO $newAccountDTO): Account;
 }

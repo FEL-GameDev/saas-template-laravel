@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { useForm, usePage } from "@inertiajs/react";
 import Dropdown from "./Dropdown";
-import InputError from "./InputError";
+import InputError from "./Forms/InputError";
 import PrimaryButton from "./PrimaryButton";
 
 dayjs.extend(relativeTime);

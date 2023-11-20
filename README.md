@@ -40,6 +40,19 @@
 - Visit your new convenience domain in the browser
 - Profit.
 
+### Ensure local tests do not reset the local dev Database
+
+Ensure that the config in `phpunit.xml` in the root folder has the following two lines uncommented
+
+```xml
+    <php>
+        ...
+        <env name="DB_CONNECTION" value="sqlite"/>
+        <env name="DB_DATABASE" value=":memory:"/>
+        ...
+    </php>
+```
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:

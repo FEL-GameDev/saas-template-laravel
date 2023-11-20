@@ -2,6 +2,10 @@
 
 use App\Http\Controllers\ChirpController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserInviteController;
+use App\Http\Controllers\UserInvitedController;
+use App\Http\Controllers\AccountController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -24,7 +28,7 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-});
+})->name('root');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -39,5 +43,25 @@ Route::middleware('auth')->group(function () {
 Route::resource('chirps', ChirpController::class)
     ->only(['index', 'store', 'update', 'destroy'])
     ->middleware(['auth', 'verified']);
+
+Route::resource('users', UserController::class)
+    ->only(['index'])
+    ->middleware(['auth', 'verified']);
+
+Route::resource('user_invites', UserInviteController::class)
+    ->only(['index', 'create', 'store', 'destroy'])
+    ->middleware(['auth', 'verified']);
+
+Route::controller(AccountController::class)
+    ->group(function () {
+        Route::get('/account', 'index')->name('account.index');
+        Route::delete('/account', 'destroy')->name('account.destroy');
+    })
+    ->middleware(['auth', 'verified']);
+
+
+Route::get('/register/invited/{inviteCode}', [UserInvitedController::class, 'invited'])->name('register.invited');
+Route::get('/register/invited', [UserInvitedController::class, 'index'])->name('register.index');
+Route::post('/register/invited/store', [UserInvitedController::class, 'store'])->name('register.acceptInvite');
 
 require __DIR__ . '/auth.php';
