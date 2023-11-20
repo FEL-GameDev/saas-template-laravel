@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Users\StoreUserInviteRequest;
 use App\Models\UserInvite;
-use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -13,7 +12,6 @@ class UserInviteController extends Controller
 {
     /**
      * Show the form for creating a new resource.
-     * @throws AuthorizationException
      */
     public function create(Request $request): Response
     {
@@ -24,7 +22,6 @@ class UserInviteController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * @throws AuthorizationException
      */
     public function store(StoreUserInviteRequest $request)
     {
@@ -40,14 +37,37 @@ class UserInviteController extends Controller
             ]
         );
 
-        return redirect(route('user_invites.index'));
+        return redirect(route('user_invites.create'));
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(UserInvite $userInvite)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(UserInvite $userInvite)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, UserInvite $userInvite)
+    {
+        //
     }
 
     /**
      * Remove the specified resource from storage.
-     * @throws AuthorizationException
      */
-    public function destroy(UserInvite $userInvite): void
+    public function destroy(UserInvite $userInvite)
     {
         $this->authorize('delete', [UserInvite::class, $userInvite]);
 
