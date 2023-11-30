@@ -2,14 +2,14 @@
 
 namespace App\DTO;
 
-class CreateUserDTO
+readonly class CreateUserDTO
 {
     private function __construct(
-        public readonly string $name,
-        public readonly string $email,
-        public readonly string $password,
-        public readonly string $accountId,
-        public readonly bool $is_owner,
+        public string $name,
+        public string $email,
+        public string $password,
+        public string $accountId,
+        public bool   $is_owner,
     ) {
     }
 
