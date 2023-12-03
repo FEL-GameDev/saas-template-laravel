@@ -57,4 +57,8 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Account::class);
     }
+
+    public function is_owner(): bool {
+        return $this->is_owner;
+    }
 }

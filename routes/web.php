@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ChirpController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserInviteController;
 use App\Http\Controllers\UserInvitedController;
@@ -49,6 +50,10 @@ Route::resource('users', UserController::class)
     ->middleware(['auth', 'verified']);
 
 Route::resource('user_invites', UserInviteController::class)
+    ->only(['index', 'create', 'store', 'destroy'])
+    ->middleware(['auth', 'verified']);
+
+Route::resource('roles', RoleController::class)
     ->only(['index', 'create', 'store', 'destroy'])
     ->middleware(['auth', 'verified']);
 

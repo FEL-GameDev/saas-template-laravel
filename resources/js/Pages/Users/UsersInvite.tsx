@@ -6,7 +6,6 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import TextField from "@/Components/Forms/TextField";
 import Card from "@/Components/Card";
 import PageContainer from "@/Components/PageContainer";
-import PageHeading from "@/Components/PageHeading";
 
 export interface UsersInviteProps extends PageProps {}
 
