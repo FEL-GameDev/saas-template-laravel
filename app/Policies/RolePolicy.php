@@ -2,7 +2,6 @@
 
 namespace App\Policies;
 
-use Illuminate\Auth\Access\Response;
 use App\Models\Role;
 use App\Models\User;
 
@@ -22,7 +21,7 @@ class RolePolicy
     public function view(User $user, Role $role): bool
     {
 
-        return $this->manage($user) && $role->account()->id == $user->account()->id;
+        return $this->manage($user) && $role->account->id == $user->account->id;
     }
 
     /**
