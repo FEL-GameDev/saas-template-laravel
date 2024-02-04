@@ -4,6 +4,7 @@ import PageContainer from "@/Components/PageContainer";
 import PrimaryButton from "@/Components/PrimaryButton";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { PageProps } from "@/types";
+import { Routes } from "@/types/routes";
 import { Head, useForm } from "@inertiajs/react";
 import React, { BaseSyntheticEvent } from "react";
 
@@ -22,7 +23,13 @@ export default function RoleCreate({ auth }: RoleCreateProps) {
     };
 
     return (
-        <AuthenticatedLayout user={auth.user}>
+        <AuthenticatedLayout
+            user={auth.user}
+            header={{
+                name: "Create Role",
+                backButton: Routes.ROLES,
+            }}
+        >
             <Head title="Create Role" />
 
             <PageContainer>

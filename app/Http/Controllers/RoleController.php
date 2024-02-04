@@ -15,7 +15,9 @@ class RoleController extends Controller
         $this->authorize('manage', [Role::class]);
 
         // TODO Role fetching via service
-        $roles = Role::where('account_id', $request->user()->account_id)->get();
+        $roles = Role::where('account_id', $request->user()->account_id)
+            ->withSum('users', 'id')
+            ->get();
 
         return Inertia::render('Roles/RolesIndex', [
             "roles" => $roles

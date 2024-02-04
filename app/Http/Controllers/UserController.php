@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\UserInvite;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -18,7 +17,7 @@ class UserController extends Controller
         $user = auth()->user();
         $this->authorize('viewList', $user);
 
-        $users = User::where('account_id', $user->account_id)->get();
+        $users = User::where('account_id', $user->account_id)->with('role')->get();
         $invited = UserInvite::where('account_id', $user->account_id)->get();
 
         return Inertia::render('Users/UsersIndex', [

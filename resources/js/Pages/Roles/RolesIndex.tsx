@@ -4,6 +4,7 @@ import { PageProps } from "@/types";
 import Card from "@/Components/Card";
 import PageContainer from "@/Components/PageContainer";
 import { Role } from "@/types/roles";
+import { Routes } from "@/types/routes";
 
 export interface RolesIndexProps extends PageProps {
     roles: Role[];
@@ -11,7 +12,13 @@ export interface RolesIndexProps extends PageProps {
 
 export default function RolesIndex({ auth, roles }: RolesIndexProps) {
     return (
-        <AuthenticatedLayout user={auth.user}>
+        <AuthenticatedLayout
+            user={auth.user}
+            header={{
+                name: "Roles",
+                backButton: Routes.ROLES,
+            }}
+        >
             <Head title="Roles" />
 
             <PageContainer>
@@ -32,10 +39,8 @@ export default function RolesIndex({ auth, roles }: RolesIndexProps) {
                     {roles.map((role) => (
                         <div key={role.id}>
                             <h5>
-                                <strong>{role.name}</strong>
-                            </h5>
-                            <p>
-                                {role.description}{" "}
+                                <strong>{role.name}</strong> (
+                                {role.users_sum_id ? role.users_sum_id : 0})
                                 <Link
                                     as="button"
                                     href={route("roles.destroy", role.id)}
@@ -43,7 +48,8 @@ export default function RolesIndex({ auth, roles }: RolesIndexProps) {
                                 >
                                     [Delete]
                                 </Link>
-                            </p>
+                            </h5>
+                            <p>{role.description} </p>
                         </div>
                     ))}
                 </Card>

@@ -5,12 +5,23 @@ import NavLink from "@/Components/NavLink";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import { Link } from "@inertiajs/react";
 import { User } from "@/types";
+import PageHeading from "@/Components/PageHeading";
+import { Routes } from "@/types/routes";
+
+interface AuthenticatedLayoutProps extends PropsWithChildren {
+    user: User;
+    header?: {
+        name?: string;
+        backButton?: Routes;
+        component?: ReactNode;
+    };
+}
 
 export default function Authenticated({
     user,
     header,
     children,
-}: PropsWithChildren<{ user: User; header?: ReactNode }>) {
+}: AuthenticatedLayoutProps) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
 
@@ -213,8 +224,12 @@ export default function Authenticated({
 
             {header && (
                 <header className="bg-white shadow">
+                    {header.backButton && (
+                        <Link href={header.backButton}>&lt; Back</Link>
+                    )}
                     <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {header}
+                        {header.name && <PageHeading label={header.name} />}
+                        {header.component}
                     </div>
                 </header>
             )}

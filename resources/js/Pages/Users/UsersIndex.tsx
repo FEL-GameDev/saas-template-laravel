@@ -4,6 +4,7 @@ import { PageProps, User } from "@/types";
 import PageContainer from "@/Components/PageContainer";
 import Card from "@/Components/Card";
 import { UserInvite } from "@/types/UserInvites";
+import { Routes } from "@/types/routes";
 
 export interface UsersIndexProps extends PageProps {
     users: User[];
@@ -20,7 +21,10 @@ export default function UsersIndex({
     invited_users,
 }: UsersIndexProps) {
     return (
-        <AuthenticatedLayout user={auth.user}>
+        <AuthenticatedLayout
+            user={auth.user}
+            header={{ name: "Manage Users", backButton: Routes.HOME }}
+        >
             <Head title="Users" />
 
             <PageContainer>
@@ -52,7 +56,10 @@ export default function UsersIndex({
                     <ul className="list-none">
                         {users.map((user) => (
                             <li key={user.id}>
-                                {user.name} - {user.email}
+                                <p>
+                                    {user.name} - {user.email}{" "}
+                                    <strong>{user.role?.name}</strong>
+                                </p>
                             </li>
                         ))}
                     </ul>
