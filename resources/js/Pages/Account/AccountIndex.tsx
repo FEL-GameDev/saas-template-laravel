@@ -4,12 +4,16 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { PageProps } from "@/types";
 import { Head } from "@inertiajs/react";
 import DeleteUserForm from "./Partials/DeleteAccountForm";
+import { Routes } from "@/types/routes";
 
 export interface AccountProps extends PageProps {}
 
 export default function Account({ auth }: AccountProps) {
     return (
-        <AuthenticatedLayout user={auth.user}>
+        <AuthenticatedLayout
+            user={auth.user}
+            header={{ backButton: Routes.HOME, name: "Manage Account" }}
+        >
             <Head title="Account" />
 
             <PageContainer>

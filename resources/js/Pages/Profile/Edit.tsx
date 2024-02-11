@@ -7,6 +7,7 @@ import { PageProps } from "@/types";
 import Card from "@/Components/Card";
 import PageContainer from "@/Components/PageContainer";
 import PageHeading from "@/Components/PageHeading";
+import { Routes } from "@/types/routes";
 
 export default function Edit({
     auth,
@@ -16,7 +17,7 @@ export default function Edit({
     return (
         <AuthenticatedLayout
             user={auth.user}
-            header={<PageHeading label="Profile" />}
+            header={{ name: "Profile", backButton: Routes.HOME }}
         >
             <Head title="Profile" />
 

@@ -3,22 +3,28 @@ import { Head, Link } from "@inertiajs/react";
 import { PageProps, User } from "@/types";
 import PageContainer from "@/Components/PageContainer";
 import Card from "@/Components/Card";
-import PrimaryButton from "@/Components/PrimaryButton";
+import { UserInvite } from "@/types/UserInvites";
+import { Routes } from "@/types/routes";
 
 export interface UsersIndexProps extends PageProps {
     users: User[];
+    invited_users: UserInvite[];
     can_invite: boolean;
-    invited_users: any;
+    can_manage_roles: boolean;
 }
 
 export default function UsersIndex({
     auth,
     users,
     can_invite,
+    can_manage_roles,
     invited_users,
 }: UsersIndexProps) {
     return (
-        <AuthenticatedLayout user={auth.user}>
+        <AuthenticatedLayout
+            user={auth.user}
+            header={{ name: "Manage Users", backButton: Routes.HOME }}
+        >
             <Head title="Users" />
 
             <PageContainer>
@@ -34,11 +40,26 @@ export default function UsersIndex({
                     )}
                 </div>
 
+                {can_manage_roles && (
+                    <div className="mx-auto text-right">
+                        <Link
+                            href={route("roles.index")}
+                            as="button"
+                            className="text-white bg-blue-200 hover:bg-blue-400 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                        >
+                            Manage Roles
+                        </Link>
+                    </div>
+                )}
+
                 <Card heading="Users" className="max-w-xl">
                     <ul className="list-none">
                         {users.map((user) => (
                             <li key={user.id}>
-                                {user.name} - {user.email}
+                                <p>
+                                    {user.name} - {user.email}{" "}
+                                    <strong>{user.role?.name}</strong>
+                                </p>
                             </li>
                         ))}
                     </ul>
@@ -51,15 +72,15 @@ export default function UsersIndex({
                 >
                     {invited_users.length > 0 && (
                         <ul>
-                            {invited_users.map((user: any) => (
-                                <li key={user.id}>
-                                    {user.name} - {user.email} -{" "}
-                                    {user.invite_code}{" "}
+                            {invited_users.map((invited_user: any) => (
+                                <li key={invited_user.id}>
+                                    {invited_user.name} - {invited_user.email} -{" "}
+                                    {invited_user.invite_code}{" "}
                                     <Link
                                         as="button"
                                         href={route(
                                             "user_invites.destroy",
-                                            user.id
+                                            invited_user.id
                                         )}
                                         method="delete"
                                     >

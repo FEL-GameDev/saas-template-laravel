@@ -2,14 +2,14 @@
 
 namespace App\DTO;
 
-class CreateUserInviteDTO
+readonly class CreateUserInviteDTO
 {
 
     private function __construct(
-        public readonly string $name,
-        public readonly string $email,
-        public readonly int    $userId,
-        public readonly int    $accountId,
+        public string $name,
+        public string $email,
+        public int    $userId,
+        public int    $accountId,
     )
     {
     }

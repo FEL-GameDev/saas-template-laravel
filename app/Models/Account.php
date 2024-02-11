@@ -23,4 +23,9 @@ class Account extends Model
     {
         return $this->hasMany(UserInvite::class);
     }
+
+    function roles(): HasMany
+    {
+        return $this->hasMany(Role::class);
+    }
 }

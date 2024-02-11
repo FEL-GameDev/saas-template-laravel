@@ -6,7 +6,7 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import TextField from "@/Components/Forms/TextField";
 import Card from "@/Components/Card";
 import PageContainer from "@/Components/PageContainer";
-import PageHeading from "@/Components/PageHeading";
+import { Routes } from "@/types/routes";
 
 export interface UsersInviteProps extends PageProps {}
 
@@ -22,7 +22,10 @@ export default function UsersInvite({ auth }: UsersInviteProps) {
     };
 
     return (
-        <AuthenticatedLayout user={auth.user}>
+        <AuthenticatedLayout
+            user={auth.user}
+            header={{ name: "Invite Users", backButton: Routes.USERS }}
+        >
             <Head title="Invite New Users" />
 
             <PageContainer>

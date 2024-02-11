@@ -2,13 +2,13 @@
 
 namespace App\DTO;
 
-class RegisterUserInviteDTO
+readonly class RegisterUserInviteDTO
 {
     private function __construct(
-        public readonly string $name,
-        public readonly string $email,
-        public readonly string $password,
-        public readonly string $inviteCode,
+        public string $name,
+        public string $email,
+        public string $password,
+        public string $inviteCode,
     ) {
     }
 

@@ -8,6 +8,6 @@ class DeleteAccount
 {
     public static function delete(User $user): void
     {
-        $user->account()->delete();
+        $user->account->delete();
     }
 }
