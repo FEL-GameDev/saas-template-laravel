@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\UserUpdateRequest;
 use App\Models\Role;
 use App\Models\User;
@@ -28,7 +27,7 @@ class UserController extends Controller
                     "id" => $user->id,
                     "name" => $user->name,
                     "email" => $user->email,
-                    "role" => $user->role->name,
+                    "role_name" => $user->role->name,
                     "edit_url" => route('users.edit', $user),
 
                 ];
@@ -64,7 +63,6 @@ class UserController extends Controller
 
     public function update(UserUpdateRequest $userUpdateRequest, User $user): RedirectResponse
     {
-
         $this->authorize('edit', $userUpdateRequest->user());
 
         $user->fill($userUpdateRequest->validated());

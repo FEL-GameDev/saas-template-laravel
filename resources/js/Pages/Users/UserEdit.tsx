@@ -11,8 +11,12 @@ import { Routes } from "@/types/routes";
 import { Head, useForm } from "@inertiajs/react";
 import React, { BaseSyntheticEvent } from "react";
 
+type UserEdit = Pick<User, "id" | "name" | "email" | "role_id"> & {
+    role: Role;
+};
+
 interface UserEditProps extends PageProps {
-    user: User;
+    user: UserEdit;
     roles: Role[];
 }
 
@@ -27,7 +31,7 @@ export default function UserEdit({ roles, auth, user }: UserEditProps) {
 
     const submit = (e: BaseSyntheticEvent) => {
         e.preventDefault();
-        patch(route("users.update", user.id), {onSuccess: () => reset() });
+        patch(route("users.update", user.id), { onSuccess: () => reset() });
     };
 
     return (

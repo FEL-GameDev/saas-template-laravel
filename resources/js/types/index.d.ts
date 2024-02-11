@@ -4,12 +4,7 @@ export interface User {
     email: string;
     email_verified_at: string;
     is_owner: boolean;
-    role?: {
-        name: string;
-        id: number;
-        role_code: string;
-    };
-    edit_url?: string;
+    role_id: number;
 }
 
 export type PageProps<
