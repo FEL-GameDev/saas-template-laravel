@@ -15,4 +15,8 @@ class UserPolicy
     {
         return $user->is_owner;
     }
+
+    public function edit(User $user) {
+        return $user->is_owner;
+    }
 }

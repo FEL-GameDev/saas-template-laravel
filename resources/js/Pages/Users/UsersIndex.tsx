@@ -55,12 +55,17 @@ export default function UsersIndex({
                 <Card heading="Users" className="max-w-xl">
                     <ul className="list-none">
                         {users.map((user) => (
-                            <li key={user.id}>
-                                <p>
-                                    {user.name} - {user.email}{" "}
-                                    <strong>{user.role?.name}</strong>
-                                </p>
-                            </li>
+                            <Link
+                                href={user.edit_url ? user.edit_url : ""}
+                                key={user.id}
+                            >
+                                <li>
+                                    <p>
+                                        {user.name} - {user.email}{" "}
+                                        <strong>{user.role?.name}</strong>
+                                    </p>
+                                </li>
+                            </Link>
                         ))}
                     </ul>
                 </Card>

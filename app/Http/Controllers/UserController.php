@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserUpdateRequest;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\UserInvite;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -21,10 +23,53 @@ class UserController extends Controller
         $invited = UserInvite::where('account_id', $user->account_id)->get();
 
         return Inertia::render('Users/UsersIndex', [
-            "users" => $users,
+            "users" => $users->map(function ($user) {
+                return [
+                    "id" => $user->id,
+                    "name" => $user->name,
+                    "email" => $user->email,
+                    "role" => $user->role->name,
+                    "edit_url" => route('users.edit', $user),
+
+                ];
+            }),
             "can_invite" => $user->can('invite', User::class),
             "can_manage_roles" => Gate::allows('manage', [Role::class]),
             'invited_users' => $invited,
         ]);
+    }
+
+    public function edit(User $user): Response
+    {
+        $this->authorize('edit', $user);
+
+        $roles = Role::where('account_id', $user->account_id)->get();
+
+        return Inertia::render('Users/UserEdit', [
+            "user" => [
+                "id" => $user->id,
+                "name" => $user->name,
+                "email" => $user->email,
+                "role_id" => $user->role_id,
+                "role" => $user->role,
+            ],
+            "roles" => $roles->map(function ($role) {
+                return [
+                    "id" => $role->id,
+                    "name" => $role->name,
+                ];
+            }),
+        ]);
+    }
+
+    public function update(UserUpdateRequest $userUpdateRequest, User $user): RedirectResponse
+    {
+
+        $this->authorize('edit', $userUpdateRequest->user());
+
+        $user->fill($userUpdateRequest->validated());
+        $user->save();
+
+        return redirect()->route('users.index');
     }
 }

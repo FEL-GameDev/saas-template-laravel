@@ -224,10 +224,10 @@ export default function Authenticated({
 
             {header && (
                 <header className="bg-white shadow">
-                    {header.backButton && (
-                        <Link href={header.backButton}>&lt; Back</Link>
-                    )}
-                    <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 gap-2">
+                        {header.backButton && (
+                            <Link href={header.backButton}>&lt; Back</Link>
+                        )}
                         {header.name && <PageHeading label={header.name} />}
                         {header.component}
                     </div>

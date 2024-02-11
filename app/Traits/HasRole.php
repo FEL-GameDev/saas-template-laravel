@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 trait HasRole
 {
+
+    protected Role $role;
+
     public function role(): BelongsTo {
         return $this->belongsTo(Role::class);
     }

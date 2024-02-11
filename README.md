@@ -8,6 +8,7 @@
 
 - Open the project in your code editor and open a terminal
 - Run `composer up` to install Laravel and its dependencies
+- Run `composer require --dev barryvdh/laravel-ide-helper` for helping your IDE know about fields in your models
 - Run `npm install` to install the necessary packages
 - Generate an application encryption key using `php artisan key:generate` (this is also available in the web browser if you navigate to the correct address for the public folder)
 - Run `php artisan migrate`
@@ -21,7 +22,7 @@
 
 - Open up the xampp `https-vhosts.conf` file from `C:\xampp\apache\conf\extra`
 - Add a record here for your virtual host
-```
+```shell
 <VirtualHost *:80>
 	DocumentRoot "C:/xampp/htdocs/saas-template-laravel/public"
 	ServerName mysaaslocal.com
@@ -52,6 +53,12 @@ Download [mailpit](https://github.com/axllent/mailpit/releases) to the root dire
 MAIL_MAILER=smtp
 MAIL_HOST=localhost
 MAIL_PORT=1025
+```
+
+## IDE Helpers
+From time to time, changes to your model will need to be reflected in your IDE. Run the following command to update your IDE helper files
+```shell
+php artisan ide-helper:models
 ```
 
 ## About Laravel

@@ -6,12 +6,15 @@ export interface User {
     is_owner: boolean;
     role?: {
         name: string;
-        id: number,
+        id: number;
         role_code: string;
-    }
+    };
+    edit_url?: string;
 }
 
-export type PageProps<T extends Record<string, unknown> = Record<string, unknown>> = T & {
+export type PageProps<
+    T extends Record<string, unknown> = Record<string, unknown>
+> = T & {
     auth: {
         user: User;
     };
