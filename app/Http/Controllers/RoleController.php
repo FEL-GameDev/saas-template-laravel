@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Roles\RoleCreateRequest;
 use App\Models\Role;
+use App\Services\Role\GetRole;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -15,9 +16,7 @@ class RoleController extends Controller
         $this->authorize('manage', [Role::class]);
 
         // TODO Role fetching via service
-        $roles = Role::where('account_id', $request->user()->account_id)
-            ->withSum('users', 'id')
-            ->get();
+        $roles = GetRole::getAllWithCount($request->user()->account_id);
 
         return Inertia::render('Roles/RolesIndex', [
             "roles" => $roles

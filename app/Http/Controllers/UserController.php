@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserUpdateRequest;
 use App\Models\Role;
 use App\Models\User;
-use App\Models\UserInvite;
+use App\Services\Role\GetRole;
+use App\Services\User\GetUser;
+use App\Services\UserInvite\GetUserInvite;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
@@ -18,8 +20,9 @@ class UserController extends Controller
         $user = auth()->user();
         $this->authorize('viewList', $user);
 
-        $users = User::where('account_id', $user->account_id)->with('role')->get();
-        $invited = UserInvite::where('account_id', $user->account_id)->get();
+
+        $users = GetUser::getAll($user->account_id);
+        $invited = GetUserInvite::getByAccountId($user->account_id);
 
         return Inertia::render('Users/UsersIndex', [
             "users" => $users->map(function ($user) {
@@ -42,7 +45,7 @@ class UserController extends Controller
     {
         $this->authorize('edit', $user);
 
-        $roles = Role::where('account_id', $user->account_id)->get();
+        $roles = GetRole::getAll($user->account_id);
 
         return Inertia::render('Users/UserEdit', [
             "user" => [

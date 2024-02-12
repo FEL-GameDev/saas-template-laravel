@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Models\Role;
+use App\Services\Role\GetRole;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
@@ -16,7 +17,7 @@ trait HasRole
     }
 
     public function assignRole(string $roleCode): bool {
-        $role = Role::where(["role_code" => $roleCode, "account_id" => $this->account_id])->first();
+        $role = GetRole::getByCode($roleCode, $this->account_id);
 
         return $this->role()->associate($role)->save();
     }
