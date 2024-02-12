@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Collection;
 
 class GetUserRepository implements GetUserRepositoryInterface
 {
-    public function getById(int $user_id): User
+    public function getById(int $userId): User
     {
-        return User::where('id', $user_id)->first();
+        return User::where('id', $userId)->first();
     }
 
     /**
