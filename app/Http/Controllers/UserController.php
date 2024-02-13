@@ -20,21 +20,11 @@ class UserController extends Controller
         $user = auth()->user();
         $this->authorize('viewList', $user);
 
-
         $users = GetUser::getAll($user->account_id);
         $invited = GetUserInvite::getByAccountId($user->account_id);
 
         return Inertia::render('Users/UsersIndex', [
-            "users" => $users->map(function ($user) {
-                return [
-                    "id" => $user->id,
-                    "name" => $user->name,
-                    "email" => $user->email,
-                    "role_name" => $user->role->name,
-                    "edit_url" => route('users.edit', $user),
-
-                ];
-            }),
+            "users" => $users,
             "can_invite" => $user->can('invite', User::class),
             "can_manage_roles" => Gate::allows('manage', [Role::class]),
             'invited_users' => $invited,
