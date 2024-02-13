@@ -19,3 +19,5 @@ yarn-error.log
 /.vscode
 mailpit.exe
 scratch.txt
+
+/_ide_helper_models.php
