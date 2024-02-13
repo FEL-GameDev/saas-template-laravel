@@ -10,5 +10,4 @@ interface GetUserRepositoryInterface
     public function getById(int $userId): User;
 
     public function getAll(int $accountId): Collection;
-
 }
