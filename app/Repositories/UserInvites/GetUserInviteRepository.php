@@ -23,6 +23,4 @@ class GetUserInviteRepository implements GetUserInviteInterface
     {
         return UserInvite::where('account_id', $accountId)->get();
     }
-
-
 }
