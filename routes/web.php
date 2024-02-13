@@ -46,7 +46,7 @@ Route::resource('chirps', ChirpController::class)
     ->middleware(['auth', 'verified']);
 
 Route::resource('users', UserController::class)
-    ->only(['index'])
+    ->only(['index', 'edit', 'update'])
     ->middleware(['auth', 'verified']);
 
 Route::resource('user_invites', UserInviteController::class)

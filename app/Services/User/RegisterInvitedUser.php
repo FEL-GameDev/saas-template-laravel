@@ -17,7 +17,7 @@ class RegisterInvitedUser
      */
     public static function register(RegisterUserInviteDTO $registerUserInviteDTO): User
     {
-        $userInvite = GetUserInvite::get($registerUserInviteDTO->inviteCode);
+        $userInvite = GetUserInvite::getByInviteCode($registerUserInviteDTO->inviteCode);
 
         $user = CreateUserDTO::create(
             name: $registerUserInviteDTO->name,

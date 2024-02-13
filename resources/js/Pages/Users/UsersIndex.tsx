@@ -6,8 +6,13 @@ import Card from "@/Components/Card";
 import { UserInvite } from "@/types/UserInvites";
 import { Routes } from "@/types/routes";
 
+type UserEditable = Pick<User, "id" | "name" | "email" | "role_id"> & {
+    edit_url: string;
+    role_name: string;
+};
+
 export interface UsersIndexProps extends PageProps {
-    users: User[];
+    users: UserEditable[];
     invited_users: UserInvite[];
     can_invite: boolean;
     can_manage_roles: boolean;
@@ -55,12 +60,17 @@ export default function UsersIndex({
                 <Card heading="Users" className="max-w-xl">
                     <ul className="list-none">
                         {users.map((user) => (
-                            <li key={user.id}>
-                                <p>
-                                    {user.name} - {user.email}{" "}
-                                    <strong>{user.role?.name}</strong>
-                                </p>
-                            </li>
+                            <Link
+                                href={user.edit_url ? user.edit_url : ""}
+                                key={user.id}
+                            >
+                                <li>
+                                    <p>
+                                        {user.name} - {user.email}{" "}
+                                        <strong>{user.role_name}</strong>
+                                    </p>
+                                </li>
+                            </Link>
                         ))}
                     </ul>
                 </Card>

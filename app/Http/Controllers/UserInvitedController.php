@@ -17,7 +17,7 @@ class UserInvitedController extends Controller
 {
     public function invited(string $inviteCode): RedirectResponse | Response
     {
-        $invitedUser = GetUserInvite::get($inviteCode);
+        $invitedUser = GetUserInvite::getByInviteCode($inviteCode);
 
         if (!$invitedUser) {
             return redirect(route('root'));
