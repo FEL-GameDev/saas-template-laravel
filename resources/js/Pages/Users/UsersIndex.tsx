@@ -1,15 +1,12 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link } from "@inertiajs/react";
-import { PageProps, User } from "@/types";
+import { PageProps } from "@/types";
 import PageContainer from "@/Components/PageContainer";
 import Card from "@/Components/Card";
 import { UserInvite } from "@/types/UserInvites";
 import { Routes } from "@/types/routes";
-
-type UserEditable = Pick<User, "id" | "name" | "email" | "role_id"> & {
-    edit_url: string;
-    role_name: string;
-};
+import { UserEditable } from "@/types/user/UserTypes";
+import ManageUsersListCard from "./components/ManageUsersListCard";
 
 export interface UsersIndexProps extends PageProps {
     users: UserEditable[];
@@ -57,23 +54,7 @@ export default function UsersIndex({
                     </div>
                 )}
 
-                <Card heading="Users" className="max-w-xl">
-                    <ul className="list-none">
-                        {users.map((user) => (
-                            <Link
-                                href={user.edit_url ? user.edit_url : ""}
-                                key={user.id}
-                            >
-                                <li>
-                                    <p>
-                                        {user.name} - {user.email}{" "}
-                                        <strong>{user.role_name}</strong>
-                                    </p>
-                                </li>
-                            </Link>
-                        ))}
-                    </ul>
-                </Card>
+                <ManageUsersListCard users={users} />
 
                 <Card
                     className="max-w-xl"
