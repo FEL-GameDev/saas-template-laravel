@@ -21,4 +21,13 @@ class GetUserRepository implements GetUserRepositoryInterface
     {
         return User::where('account_id', $accountId)->get();
     }
+
+    /**
+     * @param string $email
+     * @return User | null
+     */
+    public function getByEmail(string $email): User|null
+    {
+        return User::where('email', $email)->first();
+    }
 }
