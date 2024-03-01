@@ -29,8 +29,8 @@ class UserFactory extends Factory
             'account_id' => $account->id,
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => null,
-            'password' => Hash::make(fake()->password()),
+            'email_verified_at' => now(),
+            'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
             'role_id' => $role->id,
         ];
@@ -43,6 +43,13 @@ class UserFactory extends Factory
     {
         return $this->state(fn(array $attributes) => [
             'email_verified_at' => null,
+        ]);
+    }
+
+    public function owner(): static
+    {
+        return $this->state(fn(array $attributes) => [
+            'is_owner' => true,
         ]);
     }
 }
