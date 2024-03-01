@@ -6,7 +6,6 @@ use App\Models\User;
 
 class UserProfileUpdate
 {
-
     static function update(User $user, array $fields): User
     {
         $allowed_fields = ['name', 'email'];
