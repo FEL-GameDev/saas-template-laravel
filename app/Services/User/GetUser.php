@@ -42,7 +42,10 @@ class GetUser
         });
     }
 
-    // get by email
+    /**
+     * @param string $email
+     * @return User|null
+     */
     public static function getByEmail(string $email): User|null
     {
         $getUserRepository = new GetUserRepository();
