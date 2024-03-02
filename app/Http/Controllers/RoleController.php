@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\DTO\Role\CreateRoleDTO;
 use App\Http\Requests\Roles\RoleCreateRequest;
 use App\Models\Role;
+use App\Services\Role\CreateRole;
 use App\Services\Role\GetRole;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -22,23 +24,25 @@ class RoleController extends Controller
         ]);
     }
 
+    public function store(RoleCreateRequest $request): void
+    {
+        $this->authorize('create', [Role::class, $request->user()]);
+
+        $roleDTO = CreateRoleDTO::create(
+            accountId: $request->user()->account_id,
+            roleCode: $request->role_code,
+            name: $request->name,
+            description: $request->description
+        );
+
+        CreateRole::create($roleDTO);
+    }
+
     public function create(Request $request): Response
     {
         $this->authorize('create', [Role::class, $request->user()]);
 
         return Inertia::render('Roles/RoleCreate');
-    }
-
-    public function store(RoleCreateRequest $request): void
-    {
-        $this->authorize('create', [Role::class, $request->user()]);
-
-        Role::create([
-            "name" => $request->name,
-            "description" => $request->description,
-            "role_code" => $request->role_code,
-            "account_id" => $request->user()->account_id,
-        ]);
     }
 
     public function destroy(Role $role): void
