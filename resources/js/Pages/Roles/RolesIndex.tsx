@@ -1,16 +1,16 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, Link } from "@inertiajs/react";
-import { PageProps } from "@/types";
+import {Head, Link} from "@inertiajs/react";
+import {PageProps} from "@/types";
 import Card from "@/Components/Card";
 import PageContainer from "@/Components/PageContainer";
-import { Role } from "@/types/roles";
-import { Routes } from "@/types/routes";
+import {Role} from "@/types/roles";
+import {Routes} from "@/types/routes";
 
 export interface RolesIndexProps extends PageProps {
     roles: Role[];
 }
 
-export default function RolesIndex({ auth, roles }: RolesIndexProps) {
+export default function RolesIndex({auth, roles}: RolesIndexProps) {
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -19,7 +19,7 @@ export default function RolesIndex({ auth, roles }: RolesIndexProps) {
                 backButton: Routes.ROLES,
             }}
         >
-            <Head title="Roles" />
+            <Head title="Roles"/>
 
             <PageContainer>
                 <div className="mx-auto text-right">
@@ -40,7 +40,7 @@ export default function RolesIndex({ auth, roles }: RolesIndexProps) {
                         <div key={role.id}>
                             <h5>
                                 <strong>{role.name}</strong> (
-                                {role.users_sum_id ? role.users_sum_id : 0})
+                                {role.users_count ? role.users_count : 0})
                                 <Link
                                     as="button"
                                     href={route("roles.destroy", role.id)}
