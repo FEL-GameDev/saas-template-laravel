@@ -15,7 +15,7 @@ use Inertia\Response;
 
 class UserInvitedController extends Controller
 {
-    public function invited(string $inviteCode): RedirectResponse | Response
+    public function invited(string $inviteCode): RedirectResponse|Response
     {
         $invitedUser = GetUserInvite::getByInviteCode($inviteCode);
 
@@ -31,7 +31,7 @@ class UserInvitedController extends Controller
         ]);
     }
 
-    public function store(RegisterUserInviteRequest $request)
+    public function store(RegisterUserInviteRequest $request): RedirectResponse
     {
         $userInviteDTO = RegisterUserInviteDTO::create(
             $request->name,
