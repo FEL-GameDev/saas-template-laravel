@@ -2,7 +2,7 @@
 
 namespace App\DTO\Role;
 
-class CreateRoleDTO
+readonly class CreateRoleDTO
 {
     private function __construct(
         public string $name,
