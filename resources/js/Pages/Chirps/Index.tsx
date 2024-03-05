@@ -1,10 +1,11 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import InputError from "@/Components/Forms/InputError";
 import PrimaryButton from "@/Components/PrimaryButton";
-import { useForm, Head } from "@inertiajs/react";
+import {Head, useForm} from "@inertiajs/react";
 import Chirp from "@/Components/Chirp";
-import { User, PageProps } from "@/types";
-import { BaseSyntheticEvent, SyntheticEvent } from "react";
+import {PageProps} from "@/types";
+import {BaseSyntheticEvent} from "react";
+import {User} from "@/types/user/UserTypes";
 
 export interface Chirp {
     id: number;
@@ -19,19 +20,19 @@ export interface ChirpsIndexProps extends PageProps {
     chirps: Chirp[];
 }
 
-export default function Index({ auth, chirps }: ChirpsIndexProps) {
-    const { data, setData, post, processing, reset, errors } = useForm({
+export default function Index({auth, chirps}: ChirpsIndexProps) {
+    const {data, setData, post, processing, reset, errors} = useForm({
         message: "",
     });
 
     const submit = (e: BaseSyntheticEvent) => {
         e.preventDefault();
-        post(route("chirps.store"), { onSuccess: () => reset() });
+        post(route("chirps.store"), {onSuccess: () => reset()});
     };
 
     return (
         <AuthenticatedLayout user={auth.user}>
-            <Head title="Chirps" />
+            <Head title="Chirps"/>
 
             <div className="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
                 <form onSubmit={submit}>
@@ -42,7 +43,7 @@ export default function Index({ auth, chirps }: ChirpsIndexProps) {
                         onChange={(e) => setData("message", e.target.value)}
                     ></textarea>
 
-                    <InputError message={errors.message} className="mt-2" />
+                    <InputError message={errors.message} className="mt-2"/>
 
                     <PrimaryButton className="mt-4" disabled={processing}>
                         Chirp
@@ -51,7 +52,7 @@ export default function Index({ auth, chirps }: ChirpsIndexProps) {
 
                 <div className="mt-6 bg-white shadow-sm rounded-lg divide-y">
                     {chirps.map((chirp) => (
-                        <Chirp key={chirp.id} chirp={chirp} />
+                        <Chirp key={chirp.id} chirp={chirp}/>
                     ))}
                 </div>
             </div>

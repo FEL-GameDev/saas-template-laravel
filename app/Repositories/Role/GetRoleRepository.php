@@ -16,7 +16,7 @@ class GetRoleRepository implements GetRoleRepositoryInterface
 
     public function getByAccountIdWithCount(int $accountId): Collection
     {
-        return Role::where('account_id', $accountId)->withSum('users', 'id')->get();
+        return Role::where('account_id', $accountId)->withCount('users')->get();
     }
 
 

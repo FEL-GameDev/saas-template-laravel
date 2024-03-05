@@ -9,13 +9,15 @@ readonly class NewAccountDTO
         public string $email,
         public string $password,
         public string $accountName,
-    ) {
+    )
+    {
     }
 
     /**
      * @param string $name
      * @param string $email
      * @param string $password
+     * @param string $accountName
      * @return NewAccountDTO
      */
     public static function create(string $name, string $email, string $password, string $accountName): NewAccountDTO

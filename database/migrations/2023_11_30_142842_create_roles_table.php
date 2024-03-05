@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -18,6 +17,7 @@ return new class extends Migration
             $table->string('name')->nullable(false);
             $table->string('description');
             $table->string('role_code')->nullable(false);
+            $table->unique(['role_code', 'account_id']);
 
             $table->timestamps();
         });

@@ -12,8 +12,9 @@ use Throwable;
 class RegisterInvitedUser
 {
     /**
-     * @param $registerUserInviteDTO
+     * @param RegisterUserInviteDTO $registerUserInviteDTO
      * @return User
+     * @throws Throwable
      */
     public static function register(RegisterUserInviteDTO $registerUserInviteDTO): User
     {

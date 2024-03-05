@@ -19,7 +19,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        php: [8.1, 8.2]
+        php: [ 8.2 ]
 
     name: PHP ${{ matrix.php }}
 
@@ -31,7 +31,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite
+          extensions: dom, curl, :php-psr, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite,
           coverage: none
 
       - name: Install Composer dependencies
@@ -42,6 +42,17 @@ jobs:
 
       - name: Generate app key
         run: php artisan key:generate
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 20
+
+      - name: Install Node.js dependencies
+        run: npm ci
+
+      - name: Compile assets
+        run: npm run build
 
       - name: Execute tests
         run: vendor/bin/phpunit
