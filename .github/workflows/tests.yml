@@ -52,7 +52,7 @@ jobs:
         run: npm ci
 
       - name: Compile assets
-        run: npm run prod
+        run: npm run build
 
       - name: Run the app
         run: npm run dev
