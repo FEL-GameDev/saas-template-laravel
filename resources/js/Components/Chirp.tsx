@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { Chirp, ChirpsIndexProps } from "@/Pages/Chirps/Index";
+import {useState} from "react";
+import {Chirp, ChirpsIndexProps} from "@/Pages/Chirps/Index";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { useForm, usePage } from "@inertiajs/react";
+import {useForm, usePage} from "@inertiajs/react";
 import Dropdown from "./Dropdown";
 import InputError from "./Forms/InputError";
 import PrimaryButton from "./PrimaryButton";
@@ -13,15 +13,15 @@ interface ChirpProps {
     chirp: Chirp;
 }
 
-export default function ChirpMessage({ chirp }: ChirpProps) {
-    const { auth } = usePage<ChirpsIndexProps>().props;
+export default function ChirpMessage({chirp}: ChirpProps) {
+    const {auth} = usePage<ChirpsIndexProps>().props;
     const [editing, setEditing] = useState(false);
 
-    const { data, setData, patch, clearErrors, reset, errors } = useForm({
+    const {data, setData, patch, clearErrors, reset, errors} = useForm({
         message: chirp.message,
     });
 
-    const submit = (e) => {
+    const submit = (e: any) => {
         e.preventDefault();
         patch(route("chirps.update", chirp.id), {
             onSuccess: () => setEditing(false),
@@ -69,7 +69,8 @@ export default function ChirpMessage({ chirp }: ChirpProps) {
                                         viewBox="0 0 20 20"
                                         fill="currentColor"
                                     >
-                                        <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+                                        <path
+                                            d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"/>
                                     </svg>
                                 </button>
                             </Dropdown.Trigger>
@@ -101,7 +102,7 @@ export default function ChirpMessage({ chirp }: ChirpProps) {
                             onChange={(e) => setData("message", e.target.value)}
                             className="mt-4 w-full text-gray-900 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
                         ></textarea>
-                        <InputError message={errors.message} className="mt-2" />
+                        <InputError message={errors.message} className="mt-2"/>
                         <div className="space-x-2">
                             <PrimaryButton className="mt-4">Save</PrimaryButton>
                             <button
