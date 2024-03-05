@@ -43,5 +43,19 @@ jobs:
       - name: Generate app key
         run: php artisan key:generate
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: Install Node.js dependencies
+        run: npm ci
+
+      - name: Compile assets
+        run: npm run prod
+
+      - name: Run the app
+        run: npm run dev
+
       - name: Execute tests
         run: vendor/bin/phpunit
