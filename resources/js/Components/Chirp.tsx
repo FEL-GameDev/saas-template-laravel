@@ -1,13 +1,9 @@
 import {useState} from "react";
 import {Chirp, ChirpsIndexProps} from "@/Pages/Chirps/Index";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
 import {useForm, usePage} from "@inertiajs/react";
 import Dropdown from "./Dropdown";
 import InputError from "./Forms/InputError";
 import PrimaryButton from "./PrimaryButton";
-
-dayjs.extend(relativeTime);
 
 interface ChirpProps {
     chirp: Chirp;
@@ -49,7 +45,7 @@ export default function ChirpMessage({chirp}: ChirpProps) {
                     <div>
                         <span className="text-gray-800">{chirp.user.name}</span>
                         <small className="ml-2 text-sm text-gray-600">
-                            {dayjs(chirp.created_at).fromNow()}
+                            {chirp.created_at}
                         </small>
                         {chirp.created_at !== chirp.updated_at && (
                             <small className="text-sm text-gray-600">
