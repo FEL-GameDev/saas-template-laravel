@@ -54,8 +54,5 @@ jobs:
       - name: Compile assets
         run: npm run build
 
-      - name: Run the app
-        run: npm run dev
-
       - name: Execute tests
         run: vendor/bin/phpunit
