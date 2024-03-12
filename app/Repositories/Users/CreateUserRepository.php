@@ -15,7 +15,8 @@ class CreateUserRepository implements CreateUserRepositoryInterface
             "password" => $createUserDTO->password,
             "name" => $createUserDTO->name,
             "account_id" => $createUserDTO->accountId,
-            "is_owner" => $createUserDTO->is_owner
+            "is_owner" => $createUserDTO->isOwner,
+            "role_id" => $createUserDTO->roleId,
         ]);
     }
 }

@@ -24,7 +24,9 @@ class RegisterInvitedUser
             name: $registerUserInviteDTO->name,
             email: $registerUserInviteDTO->email,
             password: $registerUserInviteDTO->password,
-            accountId: $userInvite->account_id
+            accountId: $userInvite->account_id,
+            isOwner: false,
+            roleId: $userInvite->role_id
         );
 
         DB::beginTransaction();
