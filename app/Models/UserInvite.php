@@ -5,9 +5,8 @@ namespace App\Models;
 use App\Events\UserInviteCreated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
-
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Notifications\Notifiable;
 
 class UserInvite extends Model
 {
@@ -30,7 +29,8 @@ class UserInvite extends Model
         'user_id',
         'invite_code',
         'email',
-        'name'
+        'name',
+        'role_id'
     ];
 
     public function account(): BelongsTo
