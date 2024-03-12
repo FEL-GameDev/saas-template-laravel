@@ -2,11 +2,9 @@
 
 namespace App\Models;
 
- use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Traits\HasRole;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -50,17 +48,13 @@ class User extends Authenticatable
         'is_owner' => 'boolean',
     ];
 
-    public function chirps(): HasMany
-    {
-        return $this->hasMany(Chirp::class);
-    }
-
     public function account(): BelongsTo
     {
         return $this->belongsTo(Account::class);
     }
 
-    public function is_owner(): bool {
+    public function is_owner(): bool
+    {
         return $this->is_owner;
     }
 }
