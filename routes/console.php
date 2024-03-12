@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Chirp;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
 
@@ -18,7 +17,3 @@ use Illuminate\Support\Facades\Artisan;
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
-
-Artisan::command('chirps', function () {
-    $this->table(['User Id', 'Message'], Chirp::all(['user_id', 'message'])->toArray());
-})->purpose("Show Chirps");
