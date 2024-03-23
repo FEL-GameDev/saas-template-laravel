@@ -24,6 +24,7 @@ class UserInviteFactory extends Factory
             'account_id' => 1,
             'user_id' => 1,
             'invite_code' => Str::random(10),
+            'role_id' => 1,
         ];
     }
 }

@@ -13,10 +13,9 @@ class RegisterInvitedUser
 {
     /**
      * @param RegisterUserInviteDTO $registerUserInviteDTO
-     * @return User
-     * @throws Throwable
+     * @return User|null
      */
-    public static function register(RegisterUserInviteDTO $registerUserInviteDTO): User
+    public static function register(RegisterUserInviteDTO $registerUserInviteDTO): User|null
     {
         $userInvite = GetUserInvite::getByInviteCode($registerUserInviteDTO->inviteCode);
 
@@ -36,9 +35,10 @@ class RegisterInvitedUser
             $userInvite->delete();
 
             DB::commit();
-        } catch (Throwable $exception) {
+        } catch (Throwable) {
             DB::rollback();
-            throw $exception;
+
+            return null;
         }
 
         return $createdUser;

@@ -1,32 +1,37 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, useForm } from "@inertiajs/react";
-import { PageProps } from "@/types";
-import { BaseSyntheticEvent } from "react";
+import {Head, useForm} from "@inertiajs/react";
+import {PageProps} from "@/types";
+import React, {BaseSyntheticEvent} from "react";
 import PrimaryButton from "@/Components/PrimaryButton";
 import TextField from "@/Components/Forms/TextField";
 import Card from "@/Components/Card";
 import PageContainer from "@/Components/PageContainer";
-import { Routes } from "@/types/routes";
+import {Routes} from "@/types/routes";
+import InputSelect from "@/Components/Forms/InputSelect";
+import {Role} from "@/types/roles";
 
-export interface UsersInviteProps extends PageProps {}
+export interface UsersInviteProps extends PageProps {
+    roles: Role[];
+}
 
-export default function UsersInvite({ auth }: UsersInviteProps) {
-    const { post, reset, data, setData, errors, processing } = useForm({
+export default function UsersInvite({auth, roles}: UsersInviteProps) {
+    const {post, reset, data, setData, errors, processing} = useForm({
         name: "",
         email: "",
+        role_id: roles[0].id
     });
 
     const submit = (e: BaseSyntheticEvent) => {
         e.preventDefault();
-        post(route("user_invites.store"), { onSuccess: () => reset() });
+        post(route("user_invites.store"), {onSuccess: () => reset()});
     };
 
     return (
         <AuthenticatedLayout
             user={auth.user}
-            header={{ name: "Invite Users", backButton: Routes.USERS }}
+            header={{name: "Invite Users", backButton: Routes.USERS}}
         >
-            <Head title="Invite New Users" />
+            <Head title="Invite New Users"/>
 
             <PageContainer>
                 <Card
@@ -56,7 +61,18 @@ export default function UsersInvite({ auth }: UsersInviteProps) {
                                     setData("email", e.target.value)
                                 }
                             />
+
+                            <InputSelect
+                                label="Role"
+                                name="role_id"
+                                options={roles}
+                                selected={roles[0].id}
+                                onChange={(e: any) =>
+                                    setData("role_id", e.target.value)
+                                }
+                            />
                         </div>
+
 
                         <PrimaryButton className="mt-4" disabled={processing}>
                             Send Invite
