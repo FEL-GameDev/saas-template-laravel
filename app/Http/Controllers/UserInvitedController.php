@@ -34,14 +34,18 @@ class UserInvitedController extends Controller
     public function store(RegisterUserInviteRequest $request): RedirectResponse
     {
         $userInviteDTO = RegisterUserInviteDTO::create(
-            $request->name,
-            $request->email,
-            Hash::make($request->password),
-            $request->inviteCode
+            name: $request->name,
+            email: $request->email,
+            password: Hash::make($request->password),
+            inviteCode: $request->inviteCode,
         );
 
         $user = RegisterInvitedUser::register($userInviteDTO);
 
+        if (!$user) {
+            return redirect(route('root'));
+        }
+        
         Auth::login($user);
 
         return redirect(RouteServiceProvider::HOME);

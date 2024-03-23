@@ -20,7 +20,8 @@ class CreateUserInviteTest extends TestCase
             name: 'John Doe',
             email: fake()->email(),
             userId: $user->id,
-            accountId: $user->account_id
+            accountId: $user->account_id,
+            roleId: $user->role_id
         );
 
         $userInvite = CreateUserInvite::create($createUserInviteDTO);
@@ -34,14 +35,16 @@ class CreateUserInviteTest extends TestCase
         $createUserInviteDTO1 = CreateUserInviteDTO::create(
             name: 'John Doe',
             email: 'test@example.com', userId: $user->id,
-            accountId: $user->account_id
+            accountId: $user->account_id,
+            roleId: $user->role_id
         );
         CreateUserInvite::create($createUserInviteDTO1);
         $createUserInviteDTO2 = CreateUserInviteDTO::create(
             name: 'John Ray',
             email: 'test@example.com',
             userId: $user->id,
-            accountId: $user->account_id
+            accountId: $user->account_id,
+            roleId: $user->role_id
         );
 
         $this->expectException(Exception::class);

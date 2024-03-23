@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\DTO\CreateUserInviteDTO;
 use App\Http\Requests\Users\StoreUserInviteRequest;
 use App\Models\UserInvite;
+use App\Services\Role\GetRole;
 use App\Services\UserInvite\CreateUserInvite;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -13,9 +14,6 @@ use Inertia\Response;
 
 class UserInviteController extends Controller
 {
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreUserInviteRequest $request): RedirectResponse
     {
         $this->authorize('create', [UserInvite::class, $request->user()]);
@@ -24,7 +22,8 @@ class UserInviteController extends Controller
             name: $request->name,
             email: $request->email,
             userId: $request->user()->id,
-            accountId: $request->user()->account->id
+            accountId: $request->user()->account->id,
+            roleId: $request->role_id
         );
 
         CreateUserInvite::create($createUserInviteDTO);
@@ -39,31 +38,9 @@ class UserInviteController extends Controller
     {
         $this->authorize('invite', $request->user());
 
-        return Inertia::render('Users/UsersInvite');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(UserInvite $userInvite)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(UserInvite $userInvite)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, UserInvite $userInvite)
-    {
-        //
+        return Inertia::render('Users/UsersInvite', [
+            'roles' => GetRole::getAll($request->user()->account->id)->map(fn($role) => $role->only('id', 'name')),
+        ]);
     }
 
     /**

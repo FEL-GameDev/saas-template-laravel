@@ -45,12 +45,7 @@ class UserController extends Controller
                 "role_id" => $user->role_id,
                 "role" => $user->role,
             ],
-            "roles" => $roles->map(function ($role) {
-                return [
-                    "id" => $role->id,
-                    "name" => $role->name,
-                ];
-            }),
+            "roles" => $roles->map(fn($role) => $role->only('id', 'name')),
         ]);
     }
 

@@ -45,7 +45,7 @@ Route::resource('users', UserController::class)
     ->middleware(['auth', 'verified']);
 
 Route::resource('user_invites', UserInviteController::class)
-    ->only(['index', 'create', 'store', 'destroy'])
+    ->only(['create', 'store', 'destroy'])
     ->middleware(['auth', 'verified']);
 
 Route::resource('roles', RoleController::class)

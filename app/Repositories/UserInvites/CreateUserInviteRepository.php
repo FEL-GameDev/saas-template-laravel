@@ -6,9 +6,10 @@ use App\DTO\CreateUserInviteDTO;
 use App\Models\UserInvite;
 use App\Repositories\Interfaces\UserInvites\CreateUserInviteInterface;
 
-class CreateUserInviteRepository implements CreateUserInviteInterface {
+class CreateUserInviteRepository implements CreateUserInviteInterface
+{
 
-    public function create(CreateUserInviteDTO $createUserInviteDTO, string $inviteCode): UserInvite
+    public function create(CreateUserInviteDTO $createUserInviteDTO, string $inviteCode, int $roleId): UserInvite
     {
         return UserInvite::create(
             [
@@ -16,7 +17,8 @@ class CreateUserInviteRepository implements CreateUserInviteInterface {
                 'email' => $createUserInviteDTO->email,
                 'account_id' => $createUserInviteDTO->accountId,
                 'user_id' => $createUserInviteDTO->userId,
-                'invite_code' => $inviteCode
+                'invite_code' => $inviteCode,
+                'role_id' => $roleId
             ]
         );
     }
