@@ -36,6 +36,17 @@
 - Visit your new convenience domain in the browser
 - Profit.
 
+### Setting up Laravel Dusk (Browser Testing)
+
+Check your local apache php.ini file for the following settings and remove the `;` if they are commented out
+
+```shell
+extension=zip
+```
+
+- Restart your apache server
+- Run `php artisan dusk:install` to install Dusk
+
 ### Ensure local tests do not reset the local dev Database
 
 Ensure that the config in `phpunit.xml` in the root folder has the following two lines uncommented
