@@ -59,7 +59,7 @@ Route::resource('roles', RoleController::class)
     ->middleware(['auth', 'verified']);
 
 Route::resource('categories', CategoryController::class)
-    ->only(['index', 'create', 'store', 'destroy'])
+    ->only(['index', 'create', 'edit', 'store', 'destroy'])
     ->middleware(['auth', 'verified']);
 
 Route::controller(AccountController::class)

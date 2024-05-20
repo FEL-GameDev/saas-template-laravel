@@ -4,8 +4,9 @@ import PrimaryButtonLink from "../Buttons/PrimaryButtonLink";
 interface SimpleRowProps {
     id: number;
     title: string;
-    description: string;
+    description?: string;
     editLink?: string;
+    deleteLink?: string;
 }
 
 export default function SimpleRow({
@@ -13,6 +14,7 @@ export default function SimpleRow({
     title,
     description,
     editLink,
+    deleteLink,
 }: SimpleRowProps) {
     return (
         <div
@@ -21,11 +23,25 @@ export default function SimpleRow({
         >
             <div>
                 <p className="font-medium text-lg">{title}</p>
-                <p>{description}</p>
+
+                {description && <p>{description}</p>}
             </div>
 
-            <div>
-                {editLink && <PrimaryButtonLink title="Edit" href={editLink} />}
+            <div className="flex gap-2">
+                {editLink && (
+                    <PrimaryButtonLink
+                        title="Edit"
+                        href={route(editLink, id)}
+                    />
+                )}
+
+                {deleteLink && (
+                    <PrimaryButtonLink
+                        title="Delete"
+                        method="delete"
+                        href={route(deleteLink, id)}
+                    />
+                )}
             </div>
         </div>
     );

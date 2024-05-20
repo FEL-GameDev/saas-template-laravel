@@ -15,8 +15,6 @@ export default function CategoriesIndex({
     auth,
     categories,
 }: CategoriesIndexProps) {
-    debugger;
-
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -38,7 +36,8 @@ export default function CategoriesIndex({
                                 title={category.name}
                                 key={category.id}
                                 description={category.description}
-                                editLink="/categories/1/edit"
+                                editLink="categories.edit"
+                                deleteLink="categories.destroy"
                             />
                         ))}
                     </List>
