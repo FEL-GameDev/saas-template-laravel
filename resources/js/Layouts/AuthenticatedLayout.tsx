@@ -1,12 +1,12 @@
-import {PropsWithChildren, ReactNode, useState} from "react";
+import { PropsWithChildren, ReactNode, useState } from "react";
 import ApplicationLogo from "@/Components/ApplicationLogo";
 import Dropdown from "@/Components/Dropdown";
 import NavLink from "@/Components/NavLink";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
-import {Link} from "@inertiajs/react";
+import { Link } from "@inertiajs/react";
 import PageHeading from "@/Components/PageHeading";
-import {Routes} from "@/types/routes";
-import {User} from "@/types/user/UserTypes";
+import { Routes } from "@/types/routes";
+import { User } from "@/types/user/UserTypes";
 
 interface AuthenticatedLayoutProps extends PropsWithChildren {
     user: User;
@@ -18,10 +18,10 @@ interface AuthenticatedLayoutProps extends PropsWithChildren {
 }
 
 export default function Authenticated({
-                                          user,
-                                          header,
-                                          children,
-                                      }: AuthenticatedLayoutProps) {
+    user,
+    header,
+    children,
+}: AuthenticatedLayoutProps) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
 
@@ -33,7 +33,7 @@ export default function Authenticated({
                         <div className="flex">
                             <div className="shrink-0 flex items-center">
                                 <Link href="/">
-                                    <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800"/>
+                                    <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
                                 </Link>
                             </div>
 
@@ -46,10 +46,10 @@ export default function Authenticated({
                                 </NavLink>
 
                                 <NavLink
-                                    href={route("chirps.index")}
-                                    active={route().current("chirps.index")}
+                                    href={route("categories.index")}
+                                    active={route().current("categories.index")}
                                 >
-                                    Chirps
+                                    Categories
                                 </NavLink>
                             </div>
                         </div>
@@ -174,10 +174,10 @@ export default function Authenticated({
                         </ResponsiveNavLink>
 
                         <ResponsiveNavLink
-                            href={route("chirps.index")}
-                            active={route().current("chirps.index")}
+                            href={route("categories.index")}
+                            active={route().current("categories.index")}
                         >
-                            Chirps
+                            Categories
                         </ResponsiveNavLink>
                     </div>
 
@@ -228,7 +228,7 @@ export default function Authenticated({
                         {header.backButton && (
                             <Link href={header.backButton}>&lt; Back</Link>
                         )}
-                        {header.name && <PageHeading label={header.name}/>}
+                        {header.name && <PageHeading label={header.name} />}
                         {header.component}
                     </div>
                 </header>

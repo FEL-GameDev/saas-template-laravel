@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ChirpController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
@@ -54,6 +55,10 @@ Route::resource('user_invites', UserInviteController::class)
     ->middleware(['auth', 'verified']);
 
 Route::resource('roles', RoleController::class)
+    ->only(['index', 'create', 'store', 'destroy'])
+    ->middleware(['auth', 'verified']);
+
+Route::resource('categories', CategoryController::class)
     ->only(['index', 'create', 'store', 'destroy'])
     ->middleware(['auth', 'verified']);
 
