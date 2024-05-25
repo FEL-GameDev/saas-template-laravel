@@ -42,16 +42,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource('chirps', ChirpController::class)
-    ->only(['index', 'store', 'update', 'destroy'])
-    ->middleware(['auth', 'verified']);
-
 Route::resource('users', UserController::class)
     ->only(['index', 'edit', 'update'])
     ->middleware(['auth', 'verified']);
 
 Route::resource('user_invites', UserInviteController::class)
-    ->only(['index', 'create', 'store', 'destroy'])
+    ->only(['create', 'store', 'destroy'])
     ->middleware(['auth', 'verified']);
 
 Route::resource('roles', RoleController::class)

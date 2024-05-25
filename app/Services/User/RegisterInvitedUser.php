@@ -24,7 +24,6 @@ class RegisterInvitedUser
             name: $registerUserInviteDTO->name,
             email: $registerUserInviteDTO->email,
             password: $registerUserInviteDTO->password,
-            accountId: $userInvite->account_id
         );
 
         DB::beginTransaction();

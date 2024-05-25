@@ -22,10 +22,10 @@ class GetUserInvite
         return $getUserInviteRepository->getByInviteCode($inviteCode);
     }
 
-    public static function getByAccountId(int $accountId): Collection
+    public static function getAll(): Collection
     {
         $getUserInviteRepository = new GetUserInviteRepository();
 
-        return $getUserInviteRepository->getAllByAccountId($accountId);
+        return $getUserInviteRepository->getAll();
     }
 }

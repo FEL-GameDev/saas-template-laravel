@@ -25,7 +25,6 @@ class CreateAccount
             name: $newAccountDTO->name,
             email: $newAccountDTO->email,
             password: $newAccountDTO->password,
-            accountId: $account->id,
             is_owner: true
         );
 

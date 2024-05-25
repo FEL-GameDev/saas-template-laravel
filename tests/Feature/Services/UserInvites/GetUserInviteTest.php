@@ -49,7 +49,7 @@ class GetUserInviteTest extends TestCase
         ]);
         $getUserInviteService = new GetUserInvite();
 
-        $retrievedUserInvites = $getUserInviteService->getByAccountId($user->account_id);
+        $retrievedUserInvites = $getUserInviteService->getAll($user->account_id);
 
         $this->assertNotNull($retrievedUserInvites);
         $this->assertCount(1, $retrievedUserInvites);

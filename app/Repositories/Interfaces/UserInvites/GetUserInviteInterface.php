@@ -12,5 +12,5 @@ interface GetUserInviteInterface {
 
     public function getByInviteCode(string $inviteCode): UserInvite;
 
-    public function getAllByAccountId(int $accountId): Collection;
+    public function getAll(): Collection;
 }

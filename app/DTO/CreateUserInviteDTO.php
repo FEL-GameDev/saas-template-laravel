@@ -9,7 +9,6 @@ readonly class CreateUserInviteDTO
         public string $name,
         public string $email,
         public int    $userId,
-        public int    $accountId,
     )
     {
     }
@@ -18,14 +17,12 @@ readonly class CreateUserInviteDTO
         string $name,
         string $email,
         int    $userId,
-        int    $accountId,
     ): CreateUserInviteDTO
     {
         return new self(
             name: $name,
             email: $email,
             userId: $userId,
-            accountId: $accountId
         );
     }
 }
