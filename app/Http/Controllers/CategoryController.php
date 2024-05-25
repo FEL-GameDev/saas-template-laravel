@@ -44,11 +44,6 @@ class CategoryController extends Controller
         CategoryCreate::create($categoryCreateDTO);
     }
 
-    public function show(Category $category)
-    {
-        //
-    }
-
     public function edit(Category $category)
     {
         $this->authorize('update', [Category::class, $category]);
