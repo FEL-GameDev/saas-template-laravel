@@ -8,6 +8,7 @@ use App\Http\Requests\Category\CategoryCreateRequest;
 use App\Http\Requests\Category\CategoryUpdateRequest;
 use App\Models\Category;
 use App\Services\Category\CategoryCreate;
+use App\Services\Category\CategoryDelete;
 use App\Services\Category\CategoryUpdate;
 use App\Services\Category\GetCategory;
 use Illuminate\Http\Request;
@@ -73,7 +74,6 @@ class CategoryController extends Controller
     {
         $this->authorize('delete', [Category::class, $category]);
 
-        // TODO Service this yo
-        $category->delete();
+        CategoryDelete::delete($category);
     }
 }
