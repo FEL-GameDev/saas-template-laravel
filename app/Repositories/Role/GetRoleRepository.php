@@ -9,19 +9,19 @@ use Illuminate\Database\Eloquent\Collection;
 class GetRoleRepository implements GetRoleRepositoryInterface
 {
 
-    public function getByAccountId(int $accountId): Collection
+    public function getAll(): Collection
     {
-        return Role::where('account_id', $accountId)->get();
+        return Role::where('account_id')->get();
     }
 
-    public function getByAccountIdWithCount(int $accountId): Collection
+    public function getAllWithCount(): Collection
     {
-        return Role::where('account_id', $accountId)->withCount('users')->get();
+        return Role::where('account_id')->withCount('users')->get();
     }
 
 
-    public function getByCode(string $roleCode, int $accountId): Role
+    public function getByCode(string $roleCode): Role
     {
-        return Role::where(["role_code" => $roleCode, "account_id" => $accountId])->first();
+        return Role::where(["role_code" => $roleCode])->first();
     }
 }

@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Collection;
 
 interface GetRoleRepositoryInterface
 {
-    public function getByAccountId(int $accountId): Collection;
+    public function getAll(): Collection;
 
-    public function getByAccountIdWithCount(int $accountId): Collection;
+    public function getAllWithCount(): Collection;
 
-    public function getByCode(string $roleCode, int $accountId): Role;
+    public function getByCode(string $roleCode): Role;
 }

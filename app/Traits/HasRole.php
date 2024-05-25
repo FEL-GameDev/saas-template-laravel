@@ -17,7 +17,7 @@ trait HasRole
     }
 
     public function assignRole(string $roleCode): bool {
-        $role = GetRole::getByCode($roleCode, $this->account_id);
+        $role = GetRole::getByCode($roleCode);
 
         return $this->role()->associate($role)->save();
     }

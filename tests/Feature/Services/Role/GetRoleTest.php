@@ -32,7 +32,7 @@ class GetRoleTest extends TestCase
                 'role_id' => $role->id]
         );
 
-        $fetched_roles = $getRoleService->getAllWithCount($account->id)->toArray();
+        $fetched_roles = $getRoleService->getAllWithCount()->toArray();
 
         $this->assertArrayHasKey('users_count', $fetched_roles[0]);
         $this->assertEquals(3, $fetched_roles[0]['users_count']);
@@ -44,7 +44,7 @@ class GetRoleTest extends TestCase
         $role = Role::factory()->create(['account_id' => $account->id]);
         $getRoleService = new GetRole();
 
-        $fetched_role = $getRoleService->getByCode($role->role_code, $account->id);
+        $fetched_role = $getRoleService->getByCode($role->role_code);
 
         $this->assertEquals($role->id, $fetched_role->id);
     }
