@@ -9,8 +9,8 @@ use Illuminate\Database\Eloquent\Collection;
 class CategoryGetRepository implements CategoryGetRepositoryInterface
 {
 
-    public function getByAccountId(int $accountId): Collection
+    public function getAll(): Collection
     {
-        return Category::where('account_id', $accountId)->get();
+        return Category::all();
     }
 }

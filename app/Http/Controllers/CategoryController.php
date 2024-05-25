@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\DTO\Category\CategoryCreateDTO;
+use App\DTO\Category\CategoryUpdateDTO;
 use App\Http\Requests\Category\CategoryCreateRequest;
+use App\Http\Requests\Category\CategoryUpdateRequest;
 use App\Models\Category;
 use App\Services\Category\CategoryCreate;
+use App\Services\Category\CategoryUpdate;
 use App\Services\Category\GetCategory;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -17,7 +20,7 @@ class CategoryController extends Controller
         $this->authorize('viewAny', [Category::class, $request->user()]);
 
         return Inertia::render("Categories/CategoriesIndex", [
-            'categories' => GetCategory::getAll($request->user()->account_id),
+            'categories' => GetCategory::getAll(),
         ]);
     }
 
@@ -33,7 +36,6 @@ class CategoryController extends Controller
         $this->authorize('create', [Category::class, $request->user()]);
 
         $categoryCreateDTO = CategoryCreateDTO::create(
-            accountId: $request->user()->account->id,
             name: $request->name,
             description: $request->description
         );
@@ -48,18 +50,30 @@ class CategoryController extends Controller
 
     public function edit(Category $category)
     {
-        //
+        $this->authorize('update', [Category::class, $category]);
+
+        return Inertia::render("Categories/CategoriesEdit", [
+            'category' => $category,
+        ]);
     }
 
-    public function update(Request $request, Category $category)
+    public function update(CategoryUpdateRequest $request, Category $category)
     {
-        //
+        $this->authorize('update', [Category::class, $category]);
+
+        $categoryUpdateDTO = CategoryUpdateDTO::create(
+            name: $request->name,
+            description: $request->description
+        );
+
+        CategoryUpdate::update($categoryUpdateDTO, $category);
     }
 
     public function destroy(Category $category)
     {
         $this->authorize('delete', [Category::class, $category]);
 
+        // TODO Service this yo
         $category->delete();
     }
 }

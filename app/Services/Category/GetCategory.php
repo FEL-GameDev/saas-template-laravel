@@ -9,9 +9,9 @@ use Illuminate\Support\Collection;
 class GetCategory
 {
 
-    public static function getAll(int $accountId): Collection {
+    public static function getAll(): Collection {
         $categoryGetRepository = new CategoryGetRepository();
 
-        return $categoryGetRepository->getByAccountId($accountId);
+        return $categoryGetRepository->getAll();
     }
 }

@@ -14,7 +14,6 @@ class CategoryCreateRepository implements CategoryCreateRepositoryInterface
         return Category::create([
             'name' => $categoryCreateDTO->name,
             'description' => $categoryCreateDTO->description,
-            'account_id' => $categoryCreateDTO->accountId
         ]);
     }
 }

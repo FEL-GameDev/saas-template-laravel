@@ -6,7 +6,6 @@ class CategoryCreateDTO
 {
 
     private function __construct(
-        public int    $accountId,
         public string $name,
         public ?string $description,
     )
@@ -14,10 +13,9 @@ class CategoryCreateDTO
     }
 
 
-    public static function create(int $accountId, string $name, ?string $description): CategoryCreateDTO
+    public static function create(string $name, ?string $description): CategoryCreateDTO
     {
         return new self(
-            accountId: $accountId,
             name: $name,
             description: $description,
         );
