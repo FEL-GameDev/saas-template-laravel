@@ -6,15 +6,18 @@ use App\Models\Account;
 use App\Models\User;
 use App\Services\User\GetUser;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
+use Tests\Traits\HasAuthenticatedUser;
 
-class GetUserTest extends TestCase
+class UserGetTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, HasAuthenticatedUser;
 
-    public function test_gets_user_by_id(): void
+    public function testGetUserById(): void
     {
-        $user = User::factory()->create();
+        $user = $this->actingAsUser();
+        Auth::login($user);
         $getUserService = new GetUser();
 
         $fetched_user = $getUserService->get($user->id);
@@ -22,20 +25,23 @@ class GetUserTest extends TestCase
         $this->assertTrue($user->id === $fetched_user->id);
     }
 
-    public function test_gets_all_users(): void
+    public function testGetAllUsers(): void
     {
-        $account = Account::factory()->create();
+        $account = $this->actingAsAccount();
+        $user = $this->actingAsUser();
+        Auth::login($user);
         User::factory()->count(5)->create(['account_id' => $account->id]);
         $getUserService = new GetUser();
 
-        $fetched_users = $getUserService->getAll($account->id);
+        $fetched_users = $getUserService->getAll();
 
-        $this->assertTrue($fetched_users->count() === 5);
+        $this->assertTrue($fetched_users->count() === 6);
     }
 
-    public function test_gets_user_by_email(): void
+    public function testGetUserByEmail(): void
     {
-        $user = User::factory()->create();
+        $user = $this->actingAsUser();
+        Auth::login($user);
         $getUserService = new GetUser();
 
         $fetched_user = $getUserService->getByEmail($user->email);

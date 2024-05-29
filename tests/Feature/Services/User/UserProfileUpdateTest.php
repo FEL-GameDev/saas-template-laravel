@@ -2,22 +2,22 @@
 
 namespace Services\User;
 
-use App\Models\User;
 use App\Services\User\UserProfileUpdate;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
+use Tests\Traits\HasAuthenticatedUser;
 
 class UserProfileUpdateTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, HasAuthenticatedUser;
 
-    public function test_updates_name(): void
+    public function testUpdatesName(): void
     {
-        $user = User::factory()->create([
-            'email_verified_at' => null,
-        ]);
+        $user = $this->actingAsUser();
+        Auth::login($user);
         $userProfileUpdateService = new UserProfileUpdate();
-        
+
         $user = $userProfileUpdateService->update($user, [
                 'name' => 'Test User'
             ]
@@ -26,11 +26,10 @@ class UserProfileUpdateTest extends TestCase
         $this->assertTrue($user->name === 'Test User');
     }
 
-    public function test_updates_email(): void
+    public function testUpdatesEmail(): void
     {
-        $user = User::factory()->create([
-            'email_verified_at' => null,
-        ]);
+        $user = $this->actingAsUser();
+        Auth::login($user);
         $userProfileUpdateService = new UserProfileUpdate();
         $new_email = fake()->email();
 
@@ -41,11 +40,10 @@ class UserProfileUpdateTest extends TestCase
         $this->assertTrue($user->email === $new_email);
     }
 
-    public function test_updates_multiple_fields(): void
+    public function testUpdatesMultipleFields(): void
     {
-        $user = User::factory()->create([
-            'email_verified_at' => null,
-        ]);
+        $user = $this->actingAsUser();
+        Auth::login($user);
         $userProfileUpdateService = new UserProfileUpdate();
         $new_email = fake()->email();
 

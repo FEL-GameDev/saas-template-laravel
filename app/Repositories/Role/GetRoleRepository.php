@@ -11,12 +11,12 @@ class GetRoleRepository implements GetRoleRepositoryInterface
 
     public function getAll(): Collection
     {
-        return Role::where('account_id')->get();
+        return Role::all();
     }
 
     public function getAllWithCount(): Collection
     {
-        return Role::where('account_id')->withCount('users')->get();
+        return Role::withCount('users')->get();
     }
 
 

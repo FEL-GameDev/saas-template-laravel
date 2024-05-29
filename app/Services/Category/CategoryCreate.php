@@ -8,7 +8,6 @@ use App\Repositories\Category\CategoryCreateRepository;
 
 class CategoryCreate
 {
-
     public static function create(CategoryCreateDTO $categoryCreateDTO): Category
     {
         $createCategoryRepository = new CategoryCreateRepository();

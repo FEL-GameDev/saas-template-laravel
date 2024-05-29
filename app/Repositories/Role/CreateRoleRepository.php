@@ -13,7 +13,7 @@ class CreateRoleRepository implements CreateRoleRepositoryInterface
         return Role::create([
             'name' => $createRoleDTO->name,
             'description' => $createRoleDTO->description,
-            'role_code' => $createRoleDTO->roleCode
+            'role_code' => $createRoleDTO->roleCode,
         ]);
     }
 }

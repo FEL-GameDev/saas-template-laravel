@@ -8,7 +8,6 @@ namespace App\Models;
 use App\Traits\HasRole;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -28,7 +27,8 @@ class User extends Authenticatable
         'email',
         'password',
         'is_owner',
-        'role_id'
+        'role_id',
+        'account_id'
     ];
 
     /**
@@ -51,11 +51,6 @@ class User extends Authenticatable
         'password' => 'hashed',
         'is_owner' => 'boolean',
     ];
-
-    public function chirps(): HasMany
-    {
-        return $this->hasMany(Chirp::class);
-    }
 
     public function account(): BelongsTo
     {

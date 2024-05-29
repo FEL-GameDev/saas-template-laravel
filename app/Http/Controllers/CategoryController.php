@@ -10,7 +10,7 @@ use App\Models\Category;
 use App\Services\Category\CategoryCreate;
 use App\Services\Category\CategoryDelete;
 use App\Services\Category\CategoryUpdate;
-use App\Services\Category\GetCategory;
+use App\Services\Category\CategoryGet;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -21,7 +21,7 @@ class CategoryController extends Controller
         $this->authorize('viewAny', [Category::class, $request->user()]);
 
         return Inertia::render("Categories/CategoriesIndex", [
-            'categories' => GetCategory::getAll(),
+            'categories' => CategoryGet::getAll(),
         ]);
     }
 
