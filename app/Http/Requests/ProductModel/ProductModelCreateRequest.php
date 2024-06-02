@@ -17,6 +17,7 @@ class ProductModelCreateRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255|' .  Rule::unique(ProductModel::class, "name")->where('account_id', $this->user()->account->id),
+            'description' => 'nullable|string|max:600',
         ];
     }
 }

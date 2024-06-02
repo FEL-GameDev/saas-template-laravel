@@ -36,6 +36,7 @@ class ProductModelController extends Controller
 
         $productModelCreateDTO = ProductModelCreateDTO::create(
             name: $request->name,
+            description: $request->description
         );
 
         ProductModelCreate::create($productModelCreateDTO);

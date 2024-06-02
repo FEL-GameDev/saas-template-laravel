@@ -13,6 +13,7 @@ class ProductModelCreateRepository implements ProductModelCreateRepositoryInterf
     {
         return ProductModel::create([
             'name' => $productModelCreateDTO->name,
+            'description' => $productModelCreateDTO->description,
         ]);
     }
 }

@@ -12,5 +12,5 @@ class ProductModel extends Model
     use HasFactory;
     use HasAccountId, HasAccountScope;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'description'];
 }
