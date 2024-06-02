@@ -22,14 +22,13 @@ class GetUser
     }
 
     /**
-     * @param int $accountId
      * @return Collection
      */
-    public static function getAll(int $accountId): Collection
+    public static function getAll(): Collection
     {
         $getUserRepository = new GetUserRepository();
 
-        $users = $getUserRepository->getAll($accountId);
+        $users = $getUserRepository->getAll();
 
         return $users->map(function ($user) {
             return [

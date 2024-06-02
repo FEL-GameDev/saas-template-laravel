@@ -14,7 +14,6 @@ class CreateUserInviteRepository implements CreateUserInviteInterface {
             [
                 'name' => $createUserInviteDTO->name,
                 'email' => $createUserInviteDTO->email,
-                'account_id' => $createUserInviteDTO->accountId,
                 'user_id' => $createUserInviteDTO->userId,
                 'invite_code' => $inviteCode
             ]

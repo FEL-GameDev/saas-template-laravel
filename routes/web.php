@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ChirpController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
@@ -41,20 +42,20 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource('chirps', ChirpController::class)
-    ->only(['index', 'store', 'update', 'destroy'])
-    ->middleware(['auth', 'verified']);
-
 Route::resource('users', UserController::class)
     ->only(['index', 'edit', 'update'])
     ->middleware(['auth', 'verified']);
 
 Route::resource('user_invites', UserInviteController::class)
-    ->only(['index', 'create', 'store', 'destroy'])
+    ->only(['create', 'store', 'destroy'])
     ->middleware(['auth', 'verified']);
 
 Route::resource('roles', RoleController::class)
     ->only(['index', 'create', 'store', 'destroy'])
+    ->middleware(['auth', 'verified']);
+
+Route::resource('categories', CategoryController::class)
+    ->only(['index', 'create', 'edit', 'update', 'store', 'destroy'])
     ->middleware(['auth', 'verified']);
 
 Route::controller(AccountController::class)

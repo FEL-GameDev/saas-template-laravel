@@ -11,5 +11,5 @@ interface NewAccountRepositoryInterface
      * @param NewAccountDTO $newAccountDTO
      * @return Account
      */
-    public function createNewAccountFromUser(NewAccountDTO $newAccountDTO): Account;
+    public function create(NewAccountDTO $newAccountDTO): Account;
 }

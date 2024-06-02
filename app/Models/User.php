@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
+ use App\Traits\HasAccountId;
+ use App\Traits\HasAccountScope;
  use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Traits\HasRole;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -14,6 +15,7 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, HasRole;
+    use HasAccountScope, HasAccountId;
 
     /**
      * The attributes that are mass assignable.
@@ -25,8 +27,8 @@ class User extends Authenticatable
         'email',
         'password',
         'is_owner',
-        'account_id',
-        'role_id'
+        'role_id',
+        'account_id'
     ];
 
     /**
@@ -49,11 +51,6 @@ class User extends Authenticatable
         'password' => 'hashed',
         'is_owner' => 'boolean',
     ];
-
-    public function chirps(): HasMany
-    {
-        return $this->hasMany(Chirp::class);
-    }
 
     public function account(): BelongsTo
     {

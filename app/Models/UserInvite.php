@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Events\UserInviteCreated;
+use App\Traits\HasAccountId;
+use App\Traits\HasAccountScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
@@ -12,6 +14,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class UserInvite extends Model
 {
     use HasFactory, Notifiable;
+    use HasAccountId, HasAccountScope;
 
     /**
      * Summary of dispatchesEvents

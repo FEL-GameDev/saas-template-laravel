@@ -3,6 +3,7 @@
 namespace App\Services\User;
 
 use App\DTO\CreateUserDTO;
+use App\DTO\User\AccountOwnerDTO;
 use App\Models\User;
 use App\Repositories\Users\CreateUserRepository;
 
@@ -19,5 +20,12 @@ class CreateUser
         $createUserRepository = new CreateUserRepository();
 
         return $createUserRepository->create($createUserDTO);
+    }
+
+    public static function createOwner(AccountOwnerDTO $accountOwnerDTO): User
+    {
+        $createUserRepository = new CreateUserRepository();
+
+        return $createUserRepository->createOwner($accountOwnerDTO);
     }
 }

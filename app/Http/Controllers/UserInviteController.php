@@ -24,7 +24,6 @@ class UserInviteController extends Controller
             name: $request->name,
             email: $request->email,
             userId: $request->user()->id,
-            accountId: $request->user()->account->id
         );
 
         CreateUserInvite::create($createUserInviteDTO);
@@ -40,30 +39,6 @@ class UserInviteController extends Controller
         $this->authorize('invite', $request->user());
 
         return Inertia::render('Users/UsersInvite');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(UserInvite $userInvite)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(UserInvite $userInvite)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, UserInvite $userInvite)
-    {
-        //
     }
 
     /**

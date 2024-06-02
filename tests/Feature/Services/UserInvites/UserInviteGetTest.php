@@ -8,7 +8,7 @@ use App\Services\UserInvite\GetUserInvite;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class GetUserInviteTest extends TestCase
+class UserInviteGetTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -19,9 +19,8 @@ class GetUserInviteTest extends TestCase
             'user_id' => $user->id,
             'account_id' => $user->account_id
         ]);
-        $getUserInviteService = new GetUserInvite();
 
-        $retrievedUserInvite = $getUserInviteService->getById($userInvite->id);
+        $retrievedUserInvite = GetUserInvite::getById($userInvite->id);
 
         $this->assertNotNull($retrievedUserInvite);
     }
@@ -33,9 +32,8 @@ class GetUserInviteTest extends TestCase
             'user_id' => $user->id,
             'account_id' => $user->account_id
         ]);
-        $getUserInviteService = new GetUserInvite();
 
-        $retrievedUserInvite = $getUserInviteService->getByInviteCode($userInvite->invite_code);
+        $retrievedUserInvite = GetUserInvite::getByInviteCode($userInvite->invite_code);
 
         $this->assertNotNull($retrievedUserInvite);
     }
@@ -47,9 +45,8 @@ class GetUserInviteTest extends TestCase
             'user_id' => $user->id,
             'account_id' => $user->account_id
         ]);
-        $getUserInviteService = new GetUserInvite();
 
-        $retrievedUserInvites = $getUserInviteService->getByAccountId($user->account_id);
+        $retrievedUserInvites = GetUserInvite::getAll();
 
         $this->assertNotNull($retrievedUserInvites);
         $this->assertCount(1, $retrievedUserInvites);

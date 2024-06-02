@@ -14,12 +14,11 @@ class GetUserRepository implements GetUserRepositoryInterface
     }
 
     /**
-     * @param int $accountId
      * @return Collection
      */
-    public function getAll(int $accountId): Collection
+    public function getAll(): Collection
     {
-        return User::where('account_id', $accountId)->get();
+        return User::all();
     }
 
     /**

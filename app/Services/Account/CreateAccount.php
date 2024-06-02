@@ -4,6 +4,7 @@ namespace App\Services\Account;
 
 use App\DTO\CreateUserDTO;
 use App\DTO\NewAccountDTO;
+use App\DTO\User\AccountOwnerDTO;
 use App\Models\User;
 use App\Repositories\NewAccountRepository;
 use App\Services\User\CreateUser;
@@ -19,16 +20,15 @@ class CreateAccount
     public static function register(NewAccountDTO $newAccountDTO): User
     {
         $createAccountRepository = new NewAccountRepository();
-        $account = $createAccountRepository->createNewAccountFromUser($newAccountDTO);
+        $account = $createAccountRepository->create($newAccountDTO);
 
-        $createUserDTO = CreateUserDTO::create(
+        $accountOwnerDTO = AccountOwnerDTO::create(
             name: $newAccountDTO->name,
             email: $newAccountDTO->email,
             password: $newAccountDTO->password,
             accountId: $account->id,
-            is_owner: true
         );
 
-        return CreateUser::create($createUserDTO);
+        return CreateUser::createOwner($accountOwnerDTO);
     }
 }

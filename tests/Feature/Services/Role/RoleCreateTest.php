@@ -4,19 +4,27 @@ namespace Services\Role;
 
 use App\DTO\Role\CreateRoleDTO;
 use App\Models\Account;
+use App\Models\User;
 use App\Services\Role\CreateRole;
 use Exception;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
+use Tests\Traits\HasAuthenticatedUser;
 
-class CreateRoleTest extends TestCase
+class RoleCreateTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, HasAuthenticatedUser;
 
     public function testCreateRole(): void
     {
-        $account = Account::factory()->create();
-        $roleDTO = CreateRoleDTO::create($account->id, fake()->word(), fake()->name(), fake()->text());
+        $user = $this->actingAsUser();
+        Auth::login($user);
+        $roleDTO = CreateRoleDTO::create(
+            roleCode: fake()->word(),
+            name: fake()->name(),
+            description: fake()->text(),
+        );
 
         $role = CreateRole::create($roleDTO);
 
@@ -25,16 +33,17 @@ class CreateRoleTest extends TestCase
 
     public function testCreateRole_failsOnDuplicateRoleCode(): void
     {
-        $account = Account::factory()->create();
+        $user = $this->actingAsUser();
+        Auth::login($user);
+        auth()->setUser($user);
+
         $roleDTO = CreateRoleDTO::create(
-            accountId: $account->id,
             roleCode: 'super_admin',
             name: fake()->text(),
             description: fake()->name()
         );
         CreateRole::create($roleDTO);
         $roleDTO2 = CreateRoleDTO::create(
-            accountId: $account->id,
             roleCode: 'super_admin',
             name: fake()->text(),
             description: fake()->name()
