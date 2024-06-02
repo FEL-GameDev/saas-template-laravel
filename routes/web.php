@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductModelController;
 use App\Http\Controllers\ProfileController;
@@ -7,7 +8,6 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserInviteController;
 use App\Http\Controllers\UserInvitedController;
-use App\Http\Controllers\AccountController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -59,7 +59,7 @@ Route::resource('categories', CategoryController::class)
     ->middleware(['auth', 'verified']);
 
 
-Route::resource('product_models', ProductModelController::class)
+Route::resource('products', ProductModelController::class)
     ->only(['index', 'create', 'edit', 'update', 'store', 'destroy'])
     ->middleware(['auth', 'verified']);
 

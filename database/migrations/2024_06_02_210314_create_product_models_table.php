@@ -13,8 +13,11 @@ return new class extends Migration
     {
         Schema::create('product_models', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('account_id')->constrained()->cascadeOnDelete();
             $table->string('name')->nullable(false);
             $table->timestamps();
+
+            $table->index('account_id');
         });
     }
 

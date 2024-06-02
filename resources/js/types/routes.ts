@@ -3,4 +3,5 @@ export enum Routes {
     USERS = "/users",
     ROLES = "/roles",
     CATEGORIES = "/categories",
+    PRODUCT_MODELS = "/products",
 }
