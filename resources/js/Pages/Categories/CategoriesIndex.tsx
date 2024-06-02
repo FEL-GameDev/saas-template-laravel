@@ -6,6 +6,7 @@ import PageContainer from "@/Components/PageContainer";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { PageProps } from "@/types";
 import { Category } from "@/types/categories/category";
+import useCategoryDelete from "./hooks/useCategoryDelete";
 
 export interface CategoriesIndexProps extends PageProps {
     categories: Category[];
@@ -15,6 +16,9 @@ export default function CategoriesIndex({
     auth,
     categories,
 }: CategoriesIndexProps) {
+    const { deleteCategoryConfirmation, onClickDeleteCategory } =
+        useCategoryDelete();
+
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -37,11 +41,15 @@ export default function CategoriesIndex({
                                 key={category.id}
                                 description={category.description}
                                 editLink="categories.edit"
-                                deleteLink="categories.destroy"
+                                onClickDelete={() =>
+                                    onClickDeleteCategory(category.id)
+                                }
                             />
                         ))}
                     </List>
                 </Card>
+
+                {deleteCategoryConfirmation}
             </PageContainer>
         </AuthenticatedLayout>
     );

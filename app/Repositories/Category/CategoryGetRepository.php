@@ -13,9 +13,4 @@ class CategoryGetRepository implements CategoryGetRepositoryInterface
     {
         return Category::all();
     }
-
-    public function getById(int $id)
-    {
-        return Category::findOrFail($id);
-    }
 }

@@ -14,10 +14,4 @@ class CategoryGet
 
         return $categoryGetRepository->getAll();
     }
-
-    public static function getById(int $id): Category {
-        $categoryGetRepository = new CategoryGetRepository();
-
-        return $categoryGetRepository->getById($id);
-    }
 }

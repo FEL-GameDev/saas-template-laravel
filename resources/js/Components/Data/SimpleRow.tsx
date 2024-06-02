@@ -1,12 +1,13 @@
-import { Link } from "@inertiajs/react";
 import PrimaryButtonLink from "../Buttons/PrimaryButtonLink";
+import DangerButton from "../DangerButton";
+import PrimaryButton from "../PrimaryButton";
 
 interface SimpleRowProps {
     id: number;
     title: string;
     description?: string;
     editLink?: string;
-    deleteLink?: string;
+    onClickDelete?: () => void;
 }
 
 export default function SimpleRow({
@@ -14,7 +15,7 @@ export default function SimpleRow({
     title,
     description,
     editLink,
-    deleteLink,
+    onClickDelete,
 }: SimpleRowProps) {
     return (
         <div
@@ -35,12 +36,10 @@ export default function SimpleRow({
                     />
                 )}
 
-                {deleteLink && (
-                    <PrimaryButtonLink
-                        title="Delete"
-                        method="delete"
-                        href={route(deleteLink, id)}
-                    />
+                {onClickDelete && (
+                    <DangerButton onClick={onClickDelete} title="Delete">
+                        Delete
+                    </DangerButton>
                 )}
             </div>
         </div>
