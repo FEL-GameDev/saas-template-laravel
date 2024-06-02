@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\ChirpController;
+use App\Http\Controllers\ProductModelController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
@@ -55,6 +55,11 @@ Route::resource('roles', RoleController::class)
     ->middleware(['auth', 'verified']);
 
 Route::resource('categories', CategoryController::class)
+    ->only(['index', 'create', 'edit', 'update', 'store', 'destroy'])
+    ->middleware(['auth', 'verified']);
+
+
+Route::resource('product_models', ProductModelController::class)
     ->only(['index', 'create', 'edit', 'update', 'store', 'destroy'])
     ->middleware(['auth', 'verified']);
 
