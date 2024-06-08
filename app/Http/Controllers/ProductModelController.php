@@ -20,6 +20,7 @@ class ProductModelController extends Controller
 
         return Inertia::render("ProductModels/ProductModelsIndex", [
             'productModels' => ProductModel::all(),
+            'totalCount' => ProductModel::count(),
         ]);
     }
 
@@ -50,23 +51,23 @@ class ProductModelController extends Controller
             'productModel' => $productModel,
         ]);
     }
-//
-//    public function update(CategoryUpdateRequest $request, ProductModel $productModel)
-//    {
-//        $this->authorize('update', [ProductModel::class, $productModel]);
-//
-//        $categoryUpdateDTO = CategoryUpdateDTO::create(
-//            name: $request->name,
-//            description: $request->description
-//        );
-//
-//        CategoryUpdate::update($categoryUpdateDTO, $productModel);
-//    }
-//
-//    public function destroy(ProductModel $category)
-//    {
-//        $this->authorize('delete', [ProductModel::class, $category]);
-//
-//        CategoryDelete::delete($category);
-//    }
+
+    public function update(CategoryUpdateRequest $request, ProductModel $productModel)
+    {
+        $this->authorize('update', [ProductModel::class, $productModel]);
+
+        $categoryUpdateDTO = CategoryUpdateDTO::create(
+            name: $request->name,
+            description: $request->description
+        );
+
+        CategoryUpdate::update($categoryUpdateDTO, $productModel);
+    }
+
+    public function destroy(ProductModel $category)
+    {
+        $this->authorize('delete', [ProductModel::class, $category]);
+
+        CategoryDelete::delete($category);
+    }
 }
