@@ -1,11 +1,9 @@
 import DangerButton from "@/Components/DangerButton";
-import InputError from "@/Components/Forms/InputError";
-import InputLabel from "@/Components/Forms/InputLabel";
-import TextInput from "@/Components/Forms/TextInput";
 import Modal from "@/Components/Modal";
 import SecondaryButton from "@/Components/SecondaryButton";
-import { useForm } from "@inertiajs/react";
-import { FormEventHandler, useState } from "react";
+import {Routes} from "@/types/routes";
+import {useForm} from "@inertiajs/react";
+import {FormEventHandler, useState} from "react";
 
 export default function useCategoryDelete() {
     const [confirmingCategoryDeletion, setConfirmingCategoryDeletion] =
@@ -15,7 +13,7 @@ export default function useCategoryDelete() {
 
     function onClickDeleteCategory(
         categoryId: number,
-        redirect: string | undefined = undefined
+        redirect: Routes | undefined = undefined
     ) {
         setCategoryId(categoryId);
         setConfirmingCategoryDeletion(true);
@@ -27,14 +25,17 @@ export default function useCategoryDelete() {
         setCategoryId(undefined);
     }
 
-    const { delete: destroy, processing, errors } = useForm();
+    const { delete: destroy, processing } = useForm();
 
     const deleteCategory: FormEventHandler = (e) => {
         e.preventDefault();
 
         destroy(route("categories.destroy", categoryId), {
             preserveScroll: true,
-            onSuccess: onCloseConfirmation,
+            onSuccess: () => {
+                onCloseConfirmation();
+                redirect && route(redirect);
+            },
         });
     };
 
