@@ -1,5 +1,7 @@
-export interface Category {
-    id: number;
+import {UUID} from "crypto";
+
+export interface Product {
+    id: UUID;
     name: string;
     description?: string;
     created_at: string;

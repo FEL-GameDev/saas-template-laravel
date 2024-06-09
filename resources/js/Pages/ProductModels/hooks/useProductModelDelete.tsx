@@ -1,28 +1,30 @@
 import DangerButton from "@/Components/DangerButton";
 import Modal from "@/Components/Modal";
 import SecondaryButton from "@/Components/SecondaryButton";
+import { Product } from "@/types/products/product";
 import { Routes } from "@/types/routes";
 import { useForm } from "@inertiajs/react";
 import { FormEventHandler, useState } from "react";
 
-export default function useCategoryDelete() {
-    const [confirmingCategoryDeletion, setConfirmingCategoryDeletion] =
-        useState(false);
-    const [categoryId, setCategoryId] = useState<number | undefined>(undefined);
+export default function useProductModelDelete() {
+    const [confirmingDeletion, setConfirmingDeletion] = useState(false);
+    const [productModel, setProductModel] = useState<Product | undefined>(
+        undefined
+    );
     const [redirect, setRedirect] = useState<string | undefined>();
 
-    function onClickDeleteCategory(
-        categoryId: number,
+    function onClickDeleteProductModel(
+        product: Product,
         redirect: Routes | undefined = undefined
     ) {
-        setCategoryId(categoryId);
-        setConfirmingCategoryDeletion(true);
+        setProductModel(product);
+        setConfirmingDeletion(true);
         setRedirect(redirect);
     }
 
     function onCloseConfirmation() {
-        setConfirmingCategoryDeletion(false);
-        setCategoryId(undefined);
+        setConfirmingDeletion(false);
+        setProductModel(undefined);
     }
 
     const { delete: destroy, processing } = useForm();
@@ -30,7 +32,7 @@ export default function useCategoryDelete() {
     const deleteCategory: FormEventHandler = (e) => {
         e.preventDefault();
 
-        destroy(route("categories.destroy", categoryId), {
+        destroy(route("product.destroy", productModel?.id), {
             preserveScroll: true,
             onSuccess: () => {
                 onCloseConfirmation();
@@ -39,20 +41,17 @@ export default function useCategoryDelete() {
         });
     };
 
-    function deleteCategoryConfirmation() {
+    function deleteProductModelConfirmation() {
         return (
-            <Modal
-                show={confirmingCategoryDeletion}
-                onClose={onCloseConfirmation}
-            >
+            <Modal show={confirmingDeletion} onClose={onCloseConfirmation}>
                 <form onSubmit={deleteCategory} className="p-6">
                     <h2 className="text-lg font-medium text-gray-900">
-                        Delete Category
+                        Delete {productModel?.name}
                     </h2>
 
                     <p className="mt-1 text-sm text-gray-600">
-                        This action is permanent, all linked products will
-                        become uncategorized.
+                        This action is permanent, all linked products will be
+                        deleted.
                     </p>
 
                     <div className="mt-6"></div>
@@ -72,7 +71,7 @@ export default function useCategoryDelete() {
     }
 
     return {
-        onClickDeleteCategory,
-        deleteCategoryConfirmation: deleteCategoryConfirmation(),
+        onClickDeleteProductModel,
+        deleteProductModelConfirmation: deleteProductModelConfirmation(),
     };
 }

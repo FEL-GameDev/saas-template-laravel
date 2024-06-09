@@ -1,6 +1,5 @@
 import PrimaryButtonLink from "../Buttons/PrimaryButtonLink";
 import DangerButton from "../DangerButton";
-import PrimaryButton from "../PrimaryButton";
 
 interface SimpleRowProps {
     id: number;

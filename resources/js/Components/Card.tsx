@@ -1,3 +1,5 @@
+import { Subheading } from "./Text/Subheading";
+
 interface CardProps {
     children: any;
     className?: string;
@@ -22,11 +24,7 @@ export default function Card({
                             </h2>
                         )}
 
-                        {subheading && (
-                            <p className="mt-1 text-sm text-gray-600">
-                                {subheading}
-                            </p>
-                        )}
+                        {subheading && <Subheading>{subheading}</Subheading>}
                     </header>
                 )}
 

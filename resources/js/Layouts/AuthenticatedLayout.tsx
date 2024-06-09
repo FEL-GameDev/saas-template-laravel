@@ -1,12 +1,12 @@
-import { PropsWithChildren, ReactNode, useState } from "react";
+import {PropsWithChildren, ReactNode, useState} from "react";
 import ApplicationLogo from "@/Components/ApplicationLogo";
 import Dropdown from "@/Components/Dropdown";
 import NavLink from "@/Components/NavLink";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
-import { Link } from "@inertiajs/react";
+import {Link} from "@inertiajs/react";
 import PageHeading from "@/Components/PageHeading";
-import { Routes } from "@/types/routes";
-import { User } from "@/types/user/UserTypes";
+import {Routes} from "@/types/routes";
+import {User} from "@/types/user/UserTypes";
 
 interface AuthenticatedLayoutProps extends PropsWithChildren {
     user: User;
@@ -43,6 +43,13 @@ export default function Authenticated({
                                     active={route().current("dashboard")}
                                 >
                                     Dashboard
+                                </NavLink>
+
+                                <NavLink
+                                    href={route("products.index")}
+                                    active={route().current("products.index")}
+                                >
+                                    Products
                                 </NavLink>
 
                                 <NavLink
@@ -174,6 +181,13 @@ export default function Authenticated({
                         </ResponsiveNavLink>
 
                         <ResponsiveNavLink
+                            href={route("products.index")}
+                            active={route().current("products.index")}
+                        >
+                            Products
+                        </ResponsiveNavLink>
+
+                        <ResponsiveNavLink
                             href={route("categories.index")}
                             active={route().current("categories.index")}
                         >
@@ -228,7 +242,9 @@ export default function Authenticated({
                         {header.backButton && (
                             <Link href={header.backButton}>&lt; Back</Link>
                         )}
+
                         {header.name && <PageHeading label={header.name} />}
+
                         {header.component}
                     </div>
                 </header>
