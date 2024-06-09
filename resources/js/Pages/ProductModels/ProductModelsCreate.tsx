@@ -1,12 +1,12 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import {Head, useForm} from "@inertiajs/react";
-import {PageProps} from "@/types";
-import {BaseSyntheticEvent} from "react";
+import { Head, useForm } from "@inertiajs/react";
+import { PageProps } from "@/types";
+import { BaseSyntheticEvent } from "react";
 import PrimaryButton from "@/Components/PrimaryButton";
 import TextField from "@/Components/Forms/TextField";
 import Card from "@/Components/Card";
 import PageContainer from "@/Components/PageContainer";
-import {Routes} from "@/types/routes";
+import { Routes } from "@/types/routes";
 import TextAreaField from "@/Components/Forms/TextAreaField";
 
 export interface ProductModelsCreateProps extends PageProps {}
@@ -32,11 +32,11 @@ export default function ProductModelsCreate({
             <Head title="New Product" />
 
             <PageContainer>
-                <Card
-                    heading="Create new Product"
-                    subheading="Products are the high level item, you can create your individual variants later."
-                >
-                    <form onSubmit={submit}>
+                <form onSubmit={submit}>
+                    <Card
+                        heading="Create new Product"
+                        subheading="Products are the high level item, you can create your individual variants later."
+                    >
                         <div className="mt-6 space-y-6 flex flex-col justify-center w-4/12">
                             <TextField
                                 fullWidth
@@ -60,12 +60,11 @@ export default function ProductModelsCreate({
                                 }
                             />
                         </div>
-
-                        <PrimaryButton className="mt-4" disabled={processing}>
-                            Add Product
-                        </PrimaryButton>
-                    </form>
-                </Card>
+                    </Card>
+                    <PrimaryButton className="mt-4" disabled={processing}>
+                        Add Product
+                    </PrimaryButton>
+                </form>
             </PageContainer>
         </AuthenticatedLayout>
     );
