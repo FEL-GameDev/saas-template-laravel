@@ -21,7 +21,7 @@ export default function ProductModelsCreate({
 
     const submit = (e: BaseSyntheticEvent) => {
         e.preventDefault();
-        post(route("products.store"), { onSuccess: () => reset() });
+        post(route("product.store"), { onSuccess: () => reset() });
     };
 
     return (

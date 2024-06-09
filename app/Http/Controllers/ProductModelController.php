@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\DTO\ProductModel\ProductModelCreateDTO;
+use App\DTO\ProductModel\ProductModelUpdateDTO;
 use App\Http\Requests\ProductModel\ProductModelCreateRequest;
+use App\Http\Requests\ProductModel\ProductModelUpdateRequest;
 use App\Models\ProductModel;
 use App\Services\ProductModel\ProductModelCreate;
+use App\Services\ProductModel\ProductModelDelete;
+use App\Services\ProductModel\ProductModelUpdate;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -47,27 +51,27 @@ class ProductModelController extends Controller
     {
         $this->authorize('update', [ProductModel::class, $productModel]);
 
-        return Inertia::render("ProductModels/ProductModelEdit", [
-            'productModel' => $productModel,
+        return Inertia::render("ProductModels/ProductModelsEdit", [
+            'product' => $productModel,
         ]);
     }
 
-    public function update(CategoryUpdateRequest $request, ProductModel $productModel)
+    public function update(ProductModelUpdateRequest $request, ProductModel $productModel)
     {
         $this->authorize('update', [ProductModel::class, $productModel]);
 
-        $categoryUpdateDTO = CategoryUpdateDTO::create(
+        $productModelUpdateDTO = ProductModelUpdateDTO::create(
             name: $request->name,
             description: $request->description
         );
 
-        CategoryUpdate::update($categoryUpdateDTO, $productModel);
+        ProductModelUpdate::update($productModelUpdateDTO, $productModel);
     }
 
-    public function destroy(ProductModel $category)
+    public function destroy(ProductModel $productModel)
     {
-        $this->authorize('delete', [ProductModel::class, $category]);
+        $this->authorize('delete', [ProductModel::class, $productModel]);
 
-        CategoryDelete::delete($category);
+        ProductModelDelete::delete($productModel);
     }
 }

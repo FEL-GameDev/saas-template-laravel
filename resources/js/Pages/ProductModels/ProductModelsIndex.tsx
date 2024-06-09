@@ -5,6 +5,7 @@ import SimpleRow from "@/Components/Data/SimpleRow";
 import PageContainer from "@/Components/PageContainer";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import {PageProps} from "@/types";
+import useProductModelDelete from "./hooks/useProductModelDelete";
 
 export interface ProductModelsIndexProps extends PageProps {
     productModels: any[];
@@ -16,6 +17,9 @@ export default function ProductModelsIndex({
     productModels,
     totalCount,
 }: ProductModelsIndexProps) {
+    const { deleteProductModelConfirmation, onClickDeleteProductModel } =
+        useProductModelDelete();
+
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -24,7 +28,7 @@ export default function ProductModelsIndex({
             <PageContainer>
                 <div className="mx-auto text-right">
                     <PrimaryButtonLink
-                        href={route("products.create")}
+                        href={route("product.create")}
                         title={"New Product"}
                     />
                 </div>
@@ -37,7 +41,10 @@ export default function ProductModelsIndex({
                                 title={productModel.name}
                                 description={productModel.description}
                                 key={productModel.id}
-                                editLink="products.edit"
+                                editLink="product.edit"
+                                onClickDelete={() =>
+                                    onClickDeleteProductModel(productModel)
+                                }
                             />
                         ))}
 
@@ -45,13 +52,15 @@ export default function ProductModelsIndex({
                             <>
                                 <h3>No products yet!</h3>
                                 <PrimaryButtonLink
-                                    href={route("products.create")}
+                                    href={route("product.create")}
                                     title={"New Product"}
                                 />
                             </>
                         )}
                     </List>
                 </Card>
+
+                {deleteProductModelConfirmation}
             </PageContainer>
         </AuthenticatedLayout>
     );
