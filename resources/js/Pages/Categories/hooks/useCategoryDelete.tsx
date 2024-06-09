@@ -1,9 +1,9 @@
 import DangerButton from "@/Components/DangerButton";
 import Modal from "@/Components/Modal";
 import SecondaryButton from "@/Components/SecondaryButton";
-import {Routes} from "@/types/routes";
-import {useForm} from "@inertiajs/react";
-import {FormEventHandler, useState} from "react";
+import { Routes } from "@/types/routes";
+import { useForm } from "@inertiajs/react";
+import { FormEventHandler, useState } from "react";
 
 export default function useCategoryDelete() {
     const [confirmingCategoryDeletion, setConfirmingCategoryDeletion] =

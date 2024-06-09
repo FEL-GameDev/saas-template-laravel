@@ -1,9 +1,10 @@
 import DangerButton from "@/Components/DangerButton";
 import Modal from "@/Components/Modal";
 import SecondaryButton from "@/Components/SecondaryButton";
-import {Product} from "@/types/products/product";
-import {useForm} from "@inertiajs/react";
-import {FormEventHandler, useState} from "react";
+import { Product } from "@/types/products/product";
+import { Routes } from "@/types/routes";
+import { useForm } from "@inertiajs/react";
+import { FormEventHandler, useState } from "react";
 
 export default function useProductModelDelete() {
     const [confirmingDeletion, setConfirmingDeletion] = useState(false);
@@ -14,7 +15,7 @@ export default function useProductModelDelete() {
 
     function onClickDeleteProductModel(
         product: Product,
-        redirect: string | undefined = undefined
+        redirect: Routes | undefined = undefined
     ) {
         setProductModel(product);
         setConfirmingDeletion(true);
@@ -26,14 +27,17 @@ export default function useProductModelDelete() {
         setProductModel(undefined);
     }
 
-    const { delete: destroy, processing, errors } = useForm();
+    const { delete: destroy, processing } = useForm();
 
     const deleteCategory: FormEventHandler = (e) => {
         e.preventDefault();
 
         destroy(route("product.destroy", productModel?.id), {
             preserveScroll: true,
-            onSuccess: onCloseConfirmation,
+            onSuccess: () => {
+                onCloseConfirmation();
+                redirect && route(redirect);
+            },
         });
     };
 
