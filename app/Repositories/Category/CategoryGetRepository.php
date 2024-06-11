@@ -13,4 +13,9 @@ class CategoryGetRepository implements CategoryGetRepositoryInterface
     {
         return Category::all();
     }
+
+    public function getAllWithCount(): Collection
+    {
+        return Category::withCount('subCategories')->get();
+    }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\DTO\Category\CategoryCreateDTO;
 use App\DTO\Category\CategoryUpdateDTO;
+use App\DTO\Category\SubCategory\SubCategoryCreateDTO;
 use App\Http\Requests\Category\CategoryCreateRequest;
 use App\Http\Requests\Category\CategoryUpdateRequest;
 use App\Models\Category;
@@ -36,9 +37,17 @@ class CategoryController extends Controller
     {
         $this->authorize('create', [Category::class, $request->user()]);
 
+        $subCategories = collect($request->subCategories)->map(function ($subCategory) {
+            return SubCategoryCreateDTO::create(
+                name: $subCategory['name'],
+                description: $subCategory['description']
+            );
+        })->toArray();
+
         $categoryCreateDTO = CategoryCreateDTO::create(
             name: $request->name,
-            description: $request->description
+            description: $request->description,
+            subCategories: $subCategories,
         );
 
         CategoryCreate::create($categoryCreateDTO);

@@ -2,12 +2,12 @@
 
 namespace App\Services\Category;
 
-use App\DTO\Category\CategoryUpdateDTO;
+use App\DTO\Category\SubCategoryUpdateDTO;
 use App\Models\Category;
 
 class CategoryUpdate
 {
-    public static function update(CategoryUpdateDTO $categoryUpdateDTO, Category $category): Category
+    public static function update(SubCategoryUpdateDTO $categoryUpdateDTO, Category $category): Category
     {
         $category->update(
             [
