@@ -38,7 +38,7 @@ export default function CategoriesIndex({
                             <SimpleRow
                                 id={category.id}
                                 title={`${category.name} (${
-                                    category.sub_categories?.length || 0
+                                    category.sub_categories_count || 0
                                 } Sub-Categories)`}
                                 key={category.id}
                                 description={category.description}

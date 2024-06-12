@@ -21,8 +21,21 @@ class CategoryCreateRequest extends FormRequest
             'description' => 'nullable|string|max:255',
         ];
 
+        $subCategoryNames = array_column($this->input('subCategories', []), 'name');
+
         foreach ($this->input('subCategories', []) as $index => $subCategory) {
-            $rules["subCategories.$index.name"] = $subCategory['description'] ? 'required|string|max:255' : 'nullable|string|max:255';
+            $rules["subCategories.$index.name"] = [
+                'string',
+                'max:255',
+                $subCategory['description'] ? 'required' : 'nullable',
+
+                function ($attribute, $value, $fail) use ($subCategoryNames, $index) {
+                    if (count(array_keys($subCategoryNames, $value)) > 1) {
+                        $fail('The name field for subcategory ' . ($index + 1) . ' must be unique.');
+                    }
+                },
+            ];
+
             $rules["subCategories.$index.description"] = 'nullable|string|max:255';
         }
 
