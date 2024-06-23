@@ -1,8 +1,8 @@
 import Card from "@/Components/Card";
 import DangerButton from "@/Components/DangerButton";
-import { TextField } from "@/Components/Forms/TextField";
+import {TextField} from "@/Components/Forms/TextField";
 import SecondaryButton from "@/Components/SecondaryButton";
-import { SubCategoryCreate } from "@/types/categories/category";
+import {SubCategoryCreate} from "@/types/categories/category";
 
 interface SubCategoriesEditCardProps {
     readonly subCategories: SubCategoryCreate[];
@@ -28,7 +28,8 @@ export function SubCategoriesEditCard({
                             name={`subCategories[${index}].name`}
                             value={subCategory.name}
                             errors={
-                                (errors as any)[`subCategories.${index}.name`]
+                                ""
+                                // (errors as any)[`subCategories.${index}.name`]
                             }
                             label="Name"
                             onChange={(e: any) => {
@@ -45,9 +46,10 @@ export function SubCategoriesEditCard({
                             name={`subCategories[${index}].description`}
                             value={subCategory.description || ""}
                             errors={
-                                (errors as any)[
-                                    `subCategories.${index}.description`
-                                ]
+                                ""
+                                // (errors as any)[
+                                //     `subCategories.${index}.description`
+                                // ]
                             }
                             label="Description"
                             onChange={(e: any) => {

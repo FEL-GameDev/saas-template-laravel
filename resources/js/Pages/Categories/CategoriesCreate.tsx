@@ -1,13 +1,13 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, useForm } from "@inertiajs/react";
-import { PageProps } from "@/types";
-import { BaseSyntheticEvent } from "react";
+import {Head, useForm} from "@inertiajs/react";
+import {PageProps} from "@/types";
+import {BaseSyntheticEvent} from "react";
 import PrimaryButton from "@/Components/PrimaryButton";
 import PageContainer from "@/Components/PageContainer";
-import { Routes } from "@/types/routes";
-import { SubCategoryCreate } from "@/types/categories/category";
-import { CategoryEditCard } from "./components/CategoryEditCard";
-import { SubCategoriesEditCard } from "./components/SubCategoriesEditCard";
+import {Routes} from "@/types/routes";
+import {SubCategoryCreate} from "@/types/categories/category";
+import {CategoryEditCard} from "./components/CategoryEditCard";
+import {SubCategoriesEditCard} from "./components/SubCategoriesEditCard";
 
 export interface CategoriesCreateProps extends PageProps {}
 
@@ -25,7 +25,6 @@ export default function CategoriesCreate({ auth }: CategoriesCreateProps) {
         });
     };
 
-    debugger;
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -50,7 +49,7 @@ export default function CategoriesCreate({ auth }: CategoriesCreateProps) {
                     <SubCategoriesEditCard
                         errors={errors}
                         subCategories={data.subCategories}
-                        onChange={(subCategories: SubCategoryCreate[]) =>
+                        onChange={(subCategories) =>
                             setData("subCategories", subCategories)
                         }
                     />

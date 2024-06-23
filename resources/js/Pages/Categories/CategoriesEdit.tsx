@@ -1,12 +1,13 @@
 import PageContainer from "@/Components/PageContainer";
 import PrimaryButton from "@/Components/PrimaryButton";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { PageProps } from "@/types";
-import { Category } from "@/types/categories/category";
-import { Head, router, useForm } from "@inertiajs/react";
-import { BaseSyntheticEvent } from "react";
-import { CategoryEditCard } from "./components/CategoryEditCard";
-import { Routes } from "@/types/routes";
+import {PageProps} from "@/types";
+import {Category, SubCategoryCreate} from "@/types/categories/category";
+import {Head, router, useForm} from "@inertiajs/react";
+import {BaseSyntheticEvent} from "react";
+import {CategoryEditCard} from "./components/CategoryEditCard";
+import {Routes} from "@/types/routes";
+import {SubCategoriesEditCard} from "./components/SubCategoriesEditCard";
 
 interface CategoriesEditProps extends PageProps {
     category: Category;
@@ -16,11 +17,10 @@ export default function CategoriesEdit({
     auth,
     category,
 }: CategoriesEditProps) {
-    debugger;
-
     const { put, data, setData, errors, processing } = useForm({
         name: category.name,
         description: category.description ?? "",
+        subCategories: category.sub_categories as SubCategoryCreate[],
         category_id: category.id,
     });
 
@@ -40,7 +40,7 @@ export default function CategoriesEdit({
             <Head title="Edit Category" />
 
             <PageContainer>
-                <form onSubmit={submit} method="put">
+                <form onSubmit={submit} method="put" className="space-y-6">
                     <CategoryEditCard
                         heading="Edit Category"
                         nameValue={data.name}
@@ -53,9 +53,15 @@ export default function CategoriesEdit({
                         }
                     />
 
-                    <PrimaryButton className="mt-4" disabled={processing}>
-                        Update
-                    </PrimaryButton>
+                    <SubCategoriesEditCard
+                        subCategories={data.subCategories}
+                        errors={errors.subCategories}
+                        onChange={(subCategories) =>
+                            setData("subCategories", subCategories)
+                        }
+                    />
+
+                    <PrimaryButton disabled={processing}>Update</PrimaryButton>
 
                     <input
                         type="hidden"
