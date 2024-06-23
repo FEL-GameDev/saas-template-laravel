@@ -1,8 +1,8 @@
 import Card from "@/Components/Card";
 import DangerButton from "@/Components/DangerButton";
-import {TextField} from "@/Components/Forms/TextField";
+import { TextField } from "@/Components/Forms/TextField";
 import SecondaryButton from "@/Components/SecondaryButton";
-import {SubCategoryCreate} from "@/types/categories/category";
+import { SubCategoryCreate } from "@/types/categories/category";
 
 interface SubCategoriesEditCardProps {
     readonly subCategories: SubCategoryCreate[];

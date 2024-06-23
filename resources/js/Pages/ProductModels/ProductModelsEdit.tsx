@@ -1,14 +1,14 @@
 import Card from "@/Components/Card";
 import TextAreaField from "@/Components/Forms/TextAreaField";
-import {TextField} from "@/Components/Forms/TextField";
+import { TextField } from "@/Components/Forms/TextField";
 import PageContainer from "@/Components/PageContainer";
 import PrimaryButton from "@/Components/PrimaryButton";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import {PageProps} from "@/types";
-import {Product} from "@/types/products/product";
-import {Routes} from "@/types/routes";
-import {Head, router, useForm} from "@inertiajs/react";
-import {BaseSyntheticEvent} from "react";
+import { PageProps } from "@/types";
+import { Product } from "@/types/products/product";
+import { Routes } from "@/types/routes";
+import { Head, router, useForm } from "@inertiajs/react";
+import { BaseSyntheticEvent } from "react";
 
 interface ProductModelsEditProps extends PageProps {
     product: Product;

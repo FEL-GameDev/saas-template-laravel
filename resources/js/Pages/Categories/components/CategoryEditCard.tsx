@@ -1,5 +1,5 @@
 import Card from "@/Components/Card";
-import {TextField} from "@/Components/Forms/TextField";
+import { TextField } from "@/Components/Forms/TextField";
 
 interface CategoryCardProps {
     readonly heading: string;

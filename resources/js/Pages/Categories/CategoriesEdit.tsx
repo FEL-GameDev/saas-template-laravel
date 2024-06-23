@@ -1,12 +1,12 @@
 import PageContainer from "@/Components/PageContainer";
 import PrimaryButton from "@/Components/PrimaryButton";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import {PageProps} from "@/types";
-import {Category} from "@/types/categories/category";
-import {Head, router, useForm} from "@inertiajs/react";
-import {BaseSyntheticEvent} from "react";
-import {CategoryEditCard} from "./components/CategoryEditCard";
-import {Routes} from "@/types/routes";
+import { PageProps } from "@/types";
+import { Category } from "@/types/categories/category";
+import { Head, router, useForm } from "@inertiajs/react";
+import { BaseSyntheticEvent } from "react";
+import { CategoryEditCard } from "./components/CategoryEditCard";
+import { Routes } from "@/types/routes";
 
 interface CategoriesEditProps extends PageProps {
     category: Category;
