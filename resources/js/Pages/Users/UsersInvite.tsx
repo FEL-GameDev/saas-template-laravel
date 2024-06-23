@@ -1,12 +1,12 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, useForm } from "@inertiajs/react";
-import { PageProps } from "@/types";
-import { BaseSyntheticEvent } from "react";
+import {Head, useForm} from "@inertiajs/react";
+import {PageProps} from "@/types";
+import {BaseSyntheticEvent} from "react";
 import PrimaryButton from "@/Components/PrimaryButton";
-import TextField from "@/Components/Forms/TextField";
+import {TextField} from "@/Components/Forms/TextField";
 import Card from "@/Components/Card";
 import PageContainer from "@/Components/PageContainer";
-import { Routes } from "@/types/routes";
+import {Routes} from "@/types/routes";
 
 export interface UsersInviteProps extends PageProps {}
 

@@ -1,6 +1,6 @@
 import Card from "@/Components/Card";
 import InputSelect from "@/Components/Forms/InputSelect";
-import TextField from "@/Components/Forms/TextField";
+import {TextField} from "@/Components/Forms/TextField";
 import PageContainer from "@/Components/PageContainer";
 import PrimaryButton from "@/Components/PrimaryButton";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
@@ -20,10 +20,10 @@ interface UserEditProps extends PageProps {
     roles: Role[];
 }
 
-export default function UserEdit({roles, auth, user}: UserEditProps) {
-    const {role, name, email} = user;
+export default function UserEdit({ roles, auth, user }: UserEditProps) {
+    const { role, name, email } = user;
 
-    const {patch, reset, data, setData, errors, processing} = useForm({
+    const { patch, reset, data, setData, errors, processing } = useForm({
         name: name,
         email: email,
         role_id: role?.id,
@@ -31,15 +31,15 @@ export default function UserEdit({roles, auth, user}: UserEditProps) {
 
     const submit = (e: BaseSyntheticEvent) => {
         e.preventDefault();
-        patch(route("users.update", user.id), {onSuccess: () => reset()});
+        patch(route("users.update", user.id), { onSuccess: () => reset() });
     };
 
     return (
         <AuthenticatedLayout
             user={auth.user}
-            header={{name: "Manage Users", backButton: Routes.USERS}}
+            header={{ name: "Manage Users", backButton: Routes.USERS }}
         >
-            <Head title="Edit User"/>
+            <Head title="Edit User" />
 
             <PageContainer>
                 <Card

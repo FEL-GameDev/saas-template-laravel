@@ -1,6 +1,6 @@
 import Card from "@/Components/Card";
 import TextAreaField from "@/Components/Forms/TextAreaField";
-import TextField from "@/Components/Forms/TextField";
+import {TextField} from "@/Components/Forms/TextField";
 import PageContainer from "@/Components/PageContainer";
 import PrimaryButton from "@/Components/PrimaryButton";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
