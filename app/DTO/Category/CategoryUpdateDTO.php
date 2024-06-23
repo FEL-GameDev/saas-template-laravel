@@ -5,20 +5,16 @@ namespace App\DTO\Category;
 class CategoryUpdateDTO
 {
 
-    public string $name;
-    public string $description;
-
-    public function __construct(string $name, string $description)
+    public function __construct(public string $name, public ?string $description, public array $subCategories = [],)
     {
-        $this->name = $name;
-        $this->description = $description;
     }
 
-    public static function create(string $name, string $description): CategoryUpdateDTO
+    public static function create(string $name, ?string $description, array $subCategories): CategoryUpdateDTO
     {
         return new CategoryUpdateDTO(
             name: $name,
-            description: $description
+            description: $description,
+            subCategories: $subCategories
         );
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Services\Category;
 
 use App\DTO\Category\CategoryCreateDTO;
-use App\DTO\Category\SubCategoryCreateDTO;
 use App\Models\Category;
 use App\Repositories\Category\CategoryCreateRepository;
 

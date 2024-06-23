@@ -45,6 +45,8 @@ class CategoryController extends Controller
         );
 
         CategoryCreate::create($categoryCreateDTO);
+
+        return to_route('categories.index');
     }
 
     public function edit(Category $category)
@@ -52,7 +54,7 @@ class CategoryController extends Controller
         $this->authorize('update', [Category::class, $category]);
 
         return Inertia::render("Categories/CategoriesEdit", [
-            'category' => $category,
+            'category' => $category->load('subCategories')
         ]);
     }
 
@@ -60,9 +62,11 @@ class CategoryController extends Controller
     {
         $this->authorize('update', [Category::class, $category]);
 
+        $subCategories = $this->parseSubCategories($request->subCategories);
         $categoryUpdateDTO = CategoryUpdateDTO::create(
             name: $request->name,
-            description: $request->description
+            description: $request->description,
+            subCategories: $subCategories,
         );
 
         CategoryUpdate::update($categoryUpdateDTO, $category);
