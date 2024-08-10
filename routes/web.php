@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductModelController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
@@ -50,6 +52,22 @@ Route::resource('user_invites', UserInviteController::class)
 
 Route::resource('roles', RoleController::class)
     ->only(['index', 'create', 'store', 'destroy'])
+    ->middleware(['auth', 'verified']);
+
+Route::resource('categories', CategoryController::class)
+    ->only(['index', 'create', 'edit', 'update', 'store', 'destroy'])
+    ->middleware(['auth', 'verified']);
+
+
+Route::controller(ProductModelController::class)
+    ->group(function() {
+        Route::get('/products', 'index')->name('products.index');
+        Route::get('/product/create', 'create')->name('product.create');
+        Route::post('/product', 'store')->name('product.store');
+        Route::get('/product/{productModel}/edit', 'edit')->name('product.edit');
+        Route::patch('/product/{productModel}', 'update')->name('product.update');
+        Route::delete('/product/{productModel}', 'destroy')->name('product.destroy');
+    })
     ->middleware(['auth', 'verified']);
 
 Route::controller(AccountController::class)

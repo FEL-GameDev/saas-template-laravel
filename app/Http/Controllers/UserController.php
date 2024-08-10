@@ -20,8 +20,8 @@ class UserController extends Controller
         $user = auth()->user();
         $this->authorize('viewList', $user);
 
-        $users = GetUser::getAll($user->account_id);
-        $invited = GetUserInvite::getByAccountId($user->account_id);
+        $users = GetUser::getAll();
+        $invited = GetUserInvite::getAll();
 
         return Inertia::render('Users/UsersIndex', [
             "users" => $users,

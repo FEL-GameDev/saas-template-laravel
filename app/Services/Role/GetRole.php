@@ -8,24 +8,24 @@ use Illuminate\Database\Eloquent\Collection;
 
 class GetRole
 {
-    public static function getAll(int $accountId): Collection
+    public static function getAll(): Collection
     {
         $getRoleRepository = new GetRoleRepository();
 
-        return $getRoleRepository->getByAccountId($accountId);
+        return $getRoleRepository->getAll();
     }
 
-    public static function getAllWithCount(int $accountId): Collection
+    public static function getAllWithCount(): Collection
     {
         $getRoleRepository = new GetRoleRepository();
 
-        return $getRoleRepository->getByAccountIdWithCount($accountId);
+        return $getRoleRepository->getAllWithCount();
     }
 
-    public static function getByCode(string $roleCode, int $accountId): Role
+    public static function getByCode(string $roleCode): Role
     {
         $getRoleRepository = new GetRoleRepository();
 
-        return $getRoleRepository->getByCode($roleCode, $accountId);
+        return $getRoleRepository->getByCode($roleCode);
     }
 }

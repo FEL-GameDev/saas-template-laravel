@@ -39,7 +39,7 @@ class UserInviteController extends Controller
         $this->authorize('invite', $request->user());
 
         return Inertia::render('Users/UsersInvite', [
-            'roles' => GetRole::getAll($request->user()->account->id)->map(fn($role) => $role->only('id', 'name')),
+            'roles' => GetRole::getAll()->map(fn($role) => $role->only('id', 'name')),
         ]);
     }
 

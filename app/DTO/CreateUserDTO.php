@@ -8,9 +8,7 @@ readonly class CreateUserDTO
         public string $name,
         public string $email,
         public string $password,
-        public string $accountId,
-        public bool   $isOwner,
-        public int    $roleId,
+        public bool   $is_owner,
     )
     {
     }
@@ -19,13 +17,11 @@ readonly class CreateUserDTO
      * @param string $name
      * @param string $email
      * @param string $password
-     * @param string $accountId
-     * @param bool $isOwner
-     * @param int $roleId
+     * @param bool $is_owner
      * @return CreateUserDTO
      */
-    public static function create(string $name, string $email, string $password, string $accountId, bool $isOwner, int $roleId): CreateUserDTO
+    public static function create(string $name, string $email, string $password, bool $is_owner = false): CreateUserDTO
     {
-        return new self($name, $email, $password, $accountId, $isOwner, $roleId);
+        return new self($name, $email, $password, $is_owner);
     }
 }

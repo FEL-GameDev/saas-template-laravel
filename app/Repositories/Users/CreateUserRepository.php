@@ -3,6 +3,7 @@
 namespace App\Repositories\Users;
 
 use App\DTO\CreateUserDTO;
+use App\DTO\User\NoAccountUserDTO;
 use App\Models\User;
 use App\Repositories\Interfaces\CreateUserRepositoryInterface;
 
@@ -14,9 +15,18 @@ class CreateUserRepository implements CreateUserRepositoryInterface
             "email" => $createUserDTO->email,
             "password" => $createUserDTO->password,
             "name" => $createUserDTO->name,
-            "account_id" => $createUserDTO->accountId,
-            "is_owner" => $createUserDTO->isOwner,
-            "role_id" => $createUserDTO->roleId,
+            "is_owner" => $createUserDTO->is_owner
+        ]);
+    }
+
+    public function createForAccount(NoAccountUserDTO $accountOwnerDTO, bool $isOwner): User
+    {
+        return User::create([
+            "email" => $accountOwnerDTO->email,
+            "password" => $accountOwnerDTO->password,
+            "name" => $accountOwnerDTO->name,
+            "account_id" => $accountOwnerDTO->accountId,
+            "is_owner" => $isOwner,
         ]);
     }
 }

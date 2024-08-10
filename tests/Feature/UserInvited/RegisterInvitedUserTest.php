@@ -6,15 +6,18 @@ use App\Models\User;
 use App\Models\UserInvite;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
+use Tests\Traits\HasAuthenticatedUser;
 
 class RegisterInvitedUserTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, HasAuthenticatedUser;
 
     public function testCanViewInvitedUserRegistrationForm(): void
     {
-        $user = User::factory()->create();
+        $user = $this->actingAsUser();
+        Auth::login($user);
         $userInvite = UserInvite::factory()->create([
             'user_id' => $user->id,
         ]);
@@ -25,7 +28,8 @@ class RegisterInvitedUserTest extends TestCase
 
     public function testInvitedUserCanRegister(): void
     {
-        $user = User::factory()->create(['role_id' => 1]);
+        $user = $this->actingAsUser(['role_id' => 1]);
+        Auth::login($user);
         $userInvite = UserInvite::factory()->create([
             'user_id' => $user->id,
             'role_id' => $user->role_id,

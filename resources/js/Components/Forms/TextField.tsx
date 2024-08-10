@@ -11,7 +11,7 @@ interface TextFieldProps {
     fullWidth?: boolean;
 }
 
-export default function TextField({
+export function TextField({
     label,
     name,
     onChange,

@@ -9,7 +9,7 @@ use App\Repositories\Interfaces\NewAccountRepositoryInterface;
 class NewAccountRepository implements NewAccountRepositoryInterface
 {
 
-    public function createNewAccountFromUser(NewAccountDTO $newAccountDTO): Account
+    public function create(NewAccountDTO $newAccountDTO): Account
     {
         return Account::create([
             'name' => $newAccountDTO->accountName,

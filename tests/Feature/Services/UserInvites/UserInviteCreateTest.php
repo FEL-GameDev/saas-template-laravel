@@ -3,25 +3,27 @@
 namespace Services\UserInvites;
 
 use App\DTO\CreateUserInviteDTO;
-use App\Models\User;
 use App\Services\UserInvite\CreateUserInvite;
 use Exception;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
+use Tests\Traits\HasAuthenticatedUser;
 
-class CreateUserInviteTest extends TestCase
+class UserInviteCreateTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, HasAuthenticatedUser;
 
     public function testCreateUserInvite()
     {
-        $user = User::factory()->create();
+        $user = $this->actingAsUser();
+        Auth::login($user);
         $createUserInviteDTO = CreateUserInviteDTO::create(
             name: 'John Doe',
             email: fake()->email(),
             userId: $user->id,
             accountId: $user->account_id,
-            roleId: $user->role_id
+            roleId: $user->role_id,
         );
 
         $userInvite = CreateUserInvite::create($createUserInviteDTO);
@@ -31,12 +33,13 @@ class CreateUserInviteTest extends TestCase
 
     public function testCreateUserInvite_failsOnNonUniqueEmail()
     {
-        $user = User::factory()->create();
+        $user = $this->actingAsUser();
+        Auth::login($user);
         $createUserInviteDTO1 = CreateUserInviteDTO::create(
             name: 'John Doe',
             email: 'test@example.com', userId: $user->id,
             accountId: $user->account_id,
-            roleId: $user->role_id
+            roleId: $user->role_id,
         );
         CreateUserInvite::create($createUserInviteDTO1);
         $createUserInviteDTO2 = CreateUserInviteDTO::create(
@@ -44,11 +47,10 @@ class CreateUserInviteTest extends TestCase
             email: 'test@example.com',
             userId: $user->id,
             accountId: $user->account_id,
-            roleId: $user->role_id
+            roleId: $user->role_id,
         );
 
         $this->expectException(Exception::class);
         CreateUserInvite::create($createUserInviteDTO2);
     }
-
 }

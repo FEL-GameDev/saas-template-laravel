@@ -17,7 +17,7 @@ class RoleController extends Controller
     {
         $this->authorize('manage', [Role::class]);
 
-        $roles = GetRole::getAllWithCount($request->user()->account_id);
+        $roles = GetRole::getAllWithCount();
 
         return Inertia::render('Roles/RolesIndex', [
             "roles" => $roles
@@ -29,7 +29,6 @@ class RoleController extends Controller
         $this->authorize('create', [Role::class, $request->user()]);
 
         $roleDTO = CreateRoleDTO::create(
-            accountId: $request->user()->account_id,
             roleCode: $request->role_code,
             name: $request->name,
             description: $request->description

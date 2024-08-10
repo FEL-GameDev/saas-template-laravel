@@ -19,8 +19,8 @@ class GetUserInviteRepository implements GetUserInviteInterface
         return UserInvite::where('invite_code', $inviteCode)->first();
     }
 
-    public function getAllByAccountId(int $accountId): Collection
+    public function getAll(): Collection
     {
-        return UserInvite::where('account_id', $accountId)->get();
+        return UserInvite::all();
     }
 }
