@@ -17,7 +17,7 @@ class CategoryCreateTest extends TestCase
     {
         Auth::login($this->actingAsUser());
 
-        $categoryCreateDTO = CategoryCreateDTO::create(name: "My name", description: "Some description");
+        $categoryCreateDTO = CategoryCreateDTO::create(name: "My name", description: "Some description", subCategories: []);
         $category = CategoryCreate::create($categoryCreateDTO);
 
         $this->assertNotNull($category);

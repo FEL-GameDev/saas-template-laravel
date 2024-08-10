@@ -28,4 +28,14 @@ class Account extends Model
     {
         return $this->hasMany(Role::class);
     }
+
+    function categories(): HasMany
+    {
+        return $this->hasMany(Category::class);
+    }
+
+    function subCategories(): HasMany
+    {
+        return $this->hasMany(SubCategory::class);
+    }
 }

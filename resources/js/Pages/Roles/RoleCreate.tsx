@@ -1,12 +1,12 @@
 import Card from "@/Components/Card";
-import TextField from "@/Components/Forms/TextField";
+import {TextField} from "@/Components/Forms/TextField";
 import PageContainer from "@/Components/PageContainer";
 import PrimaryButton from "@/Components/PrimaryButton";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { PageProps } from "@/types";
-import { Routes } from "@/types/routes";
-import { Head, useForm } from "@inertiajs/react";
-import React, { BaseSyntheticEvent } from "react";
+import {PageProps} from "@/types";
+import {Routes} from "@/types/routes";
+import {Head, useForm} from "@inertiajs/react";
+import React, {BaseSyntheticEvent} from "react";
 
 interface RoleCreateProps extends PageProps {}
 

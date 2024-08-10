@@ -5,6 +5,7 @@ namespace Category;
 use App\DTO\Category\CategoryCreateDTO;
 use App\Services\Category\CategoryCreate;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 use Tests\Traits\HasAuthenticatedUser;
 
@@ -17,7 +18,7 @@ class CategoryTest extends TestCase
             ->actingAs($this->actingAsUser(['is_owner' => true]))
             ->get('/categories');
 
-        $response->assertStatus(200);
+        $response->assertStatus(Response::HTTP_OK);
     }
 
     public function testCategoryCreate()
@@ -26,7 +27,7 @@ class CategoryTest extends TestCase
             ->actingAs($this->actingAsUser(['is_owner' => true]))
             ->get('/categories/create');
 
-        $response->assertStatus(200);
+        $response->assertStatus(Response::HTTP_OK);
     }
 
     public function testCategoryCreateStore()
@@ -36,9 +37,10 @@ class CategoryTest extends TestCase
             ->post('/categories', [
                 'name' => 'Test Category',
                 'description' => 'Test Description',
+                'sub_categories' => '[]',
             ]);
 
-        $response->assertStatus(200);
+        $response->assertStatus(Response::HTTP_FOUND);
     }
 
     public function testCategoryUpdate()
@@ -48,6 +50,7 @@ class CategoryTest extends TestCase
         $categoryCreateDTO = CategoryCreateDTO::create(
             name: 'Test Category',
             description: 'Test Description',
+            subCategories: [],
         );
         $category = CategoryCreate::create($categoryCreateDTO);
 
@@ -57,9 +60,10 @@ class CategoryTest extends TestCase
                 'name' => 'Test Category',
                 'description' => 'Test Description',
                 'category_id' => $category->id,
+                'sub_categories' => '[]'
             ]);
 
-        $response->assertStatus(200);
+        $response->assertStatus(Response::HTTP_OK);
     }
 
     public function testCategoryDelete()
@@ -69,6 +73,7 @@ class CategoryTest extends TestCase
         $categoryCreateDTO = CategoryCreateDTO::create(
             name: 'Test Category',
             description: 'Test Description',
+            subCategories: [],
         );
         $category = CategoryCreate::create($categoryCreateDTO);
 
@@ -76,6 +81,6 @@ class CategoryTest extends TestCase
             ->from("/categories")
             ->delete("/categories/{$category->id}");
 
-        $response->assertStatus(200);
+        $response->assertStatus(Response::HTTP_OK);
     }
 }

@@ -4,10 +4,10 @@ import List from "@/Components/Data/List";
 import SimpleRow from "@/Components/Data/SimpleRow";
 import PageContainer from "@/Components/PageContainer";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import {PageProps} from "@/types";
-import {Category} from "@/types/categories/category";
+import { PageProps } from "@/types";
+import { Category } from "@/types/categories/category";
 import useCategoryDelete from "./hooks/useCategoryDelete";
-import {Routes} from "@/types/routes";
+import { Routes } from "@/types/routes";
 
 export interface CategoriesIndexProps extends PageProps {
     categories: Category[];
@@ -19,7 +19,6 @@ export default function CategoriesIndex({
 }: CategoriesIndexProps) {
     const { deleteCategoryConfirmation, onClickDeleteCategory } =
         useCategoryDelete();
-
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -38,7 +37,9 @@ export default function CategoriesIndex({
                         {categories.map((category) => (
                             <SimpleRow
                                 id={category.id}
-                                title={category.name}
+                                title={`${category.name} (${
+                                    category.sub_categories_count || 0
+                                } Sub-Categories)`}
                                 key={category.id}
                                 description={category.description}
                                 editLink="categories.edit"
