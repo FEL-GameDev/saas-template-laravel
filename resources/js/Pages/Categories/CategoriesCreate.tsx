@@ -5,7 +5,7 @@ import {BaseSyntheticEvent} from "react";
 import PrimaryButton from "@/Components/PrimaryButton";
 import PageContainer from "@/Components/PageContainer";
 import {Routes} from "@/types/routes";
-import {SubCategoryCreate} from "@/types/categories/category";
+import {SubCategoryEdit} from "@/types/categories/category";
 import {CategoryEditCard} from "./components/CategoryEditCard";
 import {SubCategoriesEditCard} from "./components/SubCategoriesEditCard";
 
@@ -15,7 +15,7 @@ export default function CategoriesCreate({ auth }: CategoriesCreateProps) {
     const { post, data, setData, errors, processing } = useForm({
         name: "",
         description: "",
-        subCategories: [{ name: "", description: "" }] as SubCategoryCreate[],
+        subCategories: [{ name: "", description: "" }] as SubCategoryEdit[],
     });
 
     const submit = (e: BaseSyntheticEvent) => {

@@ -4,19 +4,14 @@ namespace App\DTO\Category\SubCategory;
 
 class SubCategoryUpdateDTO
 {
-
-    public string $name;
-    public string $description;
-
-    public function __construct(string $name, string $description)
+    public function __construct(public int $id, public string $name, public ?string $description)
     {
-        $this->name = $name;
-        $this->description = $description;
     }
 
-    public static function create(string $name, string $description): SubCategoryUpdateDTO
+    public static function create(int $id, string $name, ?string $description): SubCategoryUpdateDTO
     {
         return new SubCategoryUpdateDTO(
+            id: $id,
             name: $name,
             description: $description
         );

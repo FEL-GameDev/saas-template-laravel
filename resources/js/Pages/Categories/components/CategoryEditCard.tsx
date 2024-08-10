@@ -1,5 +1,5 @@
 import Card from "@/Components/Card";
-import { TextField } from "@/Components/Forms/TextField";
+import {TextField} from "@/Components/Forms/TextField";
 
 interface CategoryCardProps {
     readonly heading: string;
@@ -22,7 +22,7 @@ export function CategoryEditCard({
 }: CategoryCardProps) {
     return (
         <Card heading={heading}>
-            <div className="mt-6 space-y-6 flex flex-col justify-center w-4/12">
+            <div className="mt-6 space-y-6 flex flex-col justify-center w-6/12">
                 <TextField
                     fullWidth
                     name="name"

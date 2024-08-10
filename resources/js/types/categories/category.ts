@@ -17,7 +17,9 @@ export interface SubCategory {
     updated_at: string;
 }
 
-export interface SubCategoryCreate {
+export interface SubCategoryEdit {
     name: string;
     description?: string;
+    id?: number;
+    delete?: boolean;
 }

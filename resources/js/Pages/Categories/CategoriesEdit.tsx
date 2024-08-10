@@ -2,7 +2,7 @@ import PageContainer from "@/Components/PageContainer";
 import PrimaryButton from "@/Components/PrimaryButton";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import {PageProps} from "@/types";
-import {Category, SubCategoryCreate} from "@/types/categories/category";
+import {Category, SubCategoryEdit} from "@/types/categories/category";
 import {Head, router, useForm} from "@inertiajs/react";
 import {BaseSyntheticEvent} from "react";
 import {CategoryEditCard} from "./components/CategoryEditCard";
@@ -20,7 +20,7 @@ export default function CategoriesEdit({
     const { put, data, setData, errors, processing } = useForm({
         name: category.name,
         description: category.description ?? "",
-        subCategories: category.sub_categories as SubCategoryCreate[],
+        subCategories: category.sub_categories as SubCategoryEdit[],
         category_id: category.id,
     });
 

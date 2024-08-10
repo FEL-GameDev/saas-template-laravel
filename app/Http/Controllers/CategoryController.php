@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\DTO\Category\CategoryCreateDTO;
 use App\DTO\Category\CategoryUpdateDTO;
 use App\DTO\Category\SubCategory\SubCategoryCreateDTO;
+use App\DTO\Category\SubCategory\SubCategoryDeleteDTO;
+use App\DTO\Category\SubCategory\SubCategoryUpdateDTO;
 use App\Http\Requests\Category\CategoryCreateRequest;
 use App\Http\Requests\Category\CategoryUpdateRequest;
 use App\Models\Category;
@@ -64,12 +66,13 @@ class CategoryController extends Controller
 
         $subCategories = $this->parseSubCategories($request->subCategories);
         $categoryUpdateDTO = CategoryUpdateDTO::create(
+            id: $category->id,
             name: $request->name,
             description: $request->description,
             subCategories: $subCategories,
         );
 
-        CategoryUpdate::update($categoryUpdateDTO, $category);
+        CategoryUpdate::update($categoryUpdateDTO);
     }
 
     public function destroy(Category $category)
@@ -84,6 +87,20 @@ class CategoryController extends Controller
         $subCategories = collect($subCategories)->map(function ($subCategory) {
             if (empty($subCategory['name']) && empty($subCategory['description'])) {
                 return null;
+            }
+
+            if (array_key_exists('delete', $subCategory) && $subCategory['delete']) {
+                return SubCategoryDeleteDTO::create(
+                    id: $subCategory['id']
+                );
+            }
+
+            if (array_key_exists('id',$subCategory)) {
+                return SubCategoryUpdateDTO::create(
+                    id: $subCategory['id'],
+                    name: $subCategory['name'],
+                    description: $subCategory['description']
+                );
             }
 
             return SubCategoryCreateDTO::create(

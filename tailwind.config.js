@@ -18,6 +18,7 @@ export default {
             },
             colors: {
                 primary: colors.indigo,
+                success: colors.emerald,
             },
         },
     },
